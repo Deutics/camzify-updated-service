@@ -1,7 +1,7 @@
 # rule_engine/factories.py
 
 from typing import Dict, Optional, Callable,Any
-from features.ImprovedLineIntrusionDetector import ImprovedLineIntrusionDetector
+from features.LineIntrusionDetector.LineIntrusionDetector import ImprovedLineIntrusionDetector
 
 FEATURE_REGISTRY = {}
 

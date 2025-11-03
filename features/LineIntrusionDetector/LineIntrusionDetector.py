@@ -3,7 +3,7 @@ from data_models.TrackedObject import TrackedObject
 from data_models.FrameData import FrameData
 from rule_engine.FeatureBase import FeatureBase
 from utils.logger import get_logger
-from .utils import is_point_inside_bbox, CooldownTracker, has_line_crossed, direction_matches
+from features.utils import is_point_inside_bbox, CooldownTracker, has_line_crossed, direction_matches
 
 logger = get_logger(__name__)
 

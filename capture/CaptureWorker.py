@@ -7,7 +7,7 @@ import threading
 from typing import Any, Optional, Union
 
 from SafeCounter import SafeCounter
-from capture.ImprovedStreamCapture import ImprovedStreamCapture
+from capture.StreamCapture import ImprovedStreamCapture
 # from capture.FFmpegCapture import FFmpegStreamCapture as ImprovedStreamCapture
 from capture.MotionDetector import MotionDetection
 from capture.utils import safe_put_queue, downscale_bgr, to_gray
@@ -79,7 +79,7 @@ def capture_worker(
                 time.sleep(0.01)
                 continue
 
-            ts = now
+            ts = time.time()
 
             if mode == "sensor":
                 last_sensor_ts = now

@@ -78,7 +78,10 @@ class RuleEngineManager:
         with self._lock:
             eng = self._stream_engines.get(sid)
             if eng is not None:
+                logger.debug(f"[RuleEngineManager] found existing engine for {sid}")
                 return eng
+
+            logger.info(f"[RuleEngineManager] creating StreamRuleEngine for {sid}")
 
             eng = StreamRuleEngine(
                 stream_id=sid,
@@ -119,15 +122,21 @@ class RuleEngineManager:
         tracked_objects_by_stream: Dict[str, List[Any]],
         frames_for_viz: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, bool]:
+        logger.debug(f"[RuleEngineManager] dispatch called for sids={list(tracked_objects_by_stream.keys())}")
         frames_for_viz = frames_for_viz or {}
         results: Dict[str, bool] = {}
 
         for sid, tracked_objects in tracked_objects_by_stream.items():
             try:
+                num_objs = len(tracked_objects)
+                logger.debug(
+                    f"[RuleEngineManager] Stream {sid}: {num_objs} tracked objects passed to dispatcher."
+                )
                 engine = self._ensure_stream_engine(sid)
                 frame_data = frames_for_viz.get(sid)
                 results[sid] = engine.enqueue(tracked_objects, frame_data=frame_data, meta={})
-            except Exception:
+            except Exception as e:
+                logger.exception(f"[RuleEngineManager] Dispatch error for stream {sid}: {e}")
                 results[sid] = False
         return results
 

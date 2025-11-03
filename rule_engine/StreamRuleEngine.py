@@ -59,6 +59,7 @@ class StreamRuleEngine:
     # Public API
     # -----------------------------
     def enqueue(self, tracked_objects: List[TrackedObject], frame_data: Optional[FrameData] = None, meta: Optional[dict] = None) -> bool:
+
         item = {"tracked_objects": tracked_objects, "frame_data": frame_data, "meta": meta or {}}
         try:
             self.queue.put_nowait(item)
@@ -67,6 +68,7 @@ class StreamRuleEngine:
             try:
                 _ = self.queue.get_nowait()
                 self.queue.put_nowait(item)
+                logger.debug(f"[StreamRuleEngine:{self.stream_id}] enqueued item (queue_size={self.queue.qsize()})")
                 return True
             except Exception as e:
                 logger.warning(f"Queue full, failed to enqueue: {e}")
@@ -94,6 +96,7 @@ class StreamRuleEngine:
     def _load_features_from_config(self) -> None:
         cfgs = safe_call(lambda: self.config_store.get_active_features(self.stream_id) or {}, default={})
         new_instances: Dict[Tuple[str, int], FeatureBase] = {}
+        logger.info(f"[StreamRuleEngine:{self.stream_id}] loading features from config; found: {list(cfgs.keys())}")
 
         for feature_name, cfg_list in cfgs.items():
             factory = self.feature_registry.get(feature_name) or get_feature_factory(feature_name)
@@ -156,6 +159,9 @@ class StreamRuleEngine:
     # Internal: worker loop
     # -----------------------------
     def _worker_loop(self) -> None:
+        logger.debug(
+            f"[StreamRuleEngine:{self.stream_id}] worker started, features={list(self.feature_instances.keys())}")
+
         while not self.stop_event.is_set():
             try:
                 item = self.queue.get(timeout=0.5)

@@ -1,16 +1,14 @@
 import multiprocessing as mp
 import threading
 import time
-import os
 from typing import List, Dict, Any
 
 # Core components
 from capture.MultiprocessCaptureManager import MultiprocessCaptureManager
 from PriorityThreadSafeQueue import PriorityThreadSafeQueue
-from SharedInferenceEngine import SharedInferenceEngine
+from ObjectDetector.SharedInferenceEngine import SharedInferenceEngine
 from tracking.TrackedObjectManager import TrackedObjectManager
 from RuleConfigStore import RuleConfigStore
-from data_models.FrameData import FrameData
 from SafeCounter import SafeCounter
 
 # Rule engine

@@ -274,6 +274,7 @@ class APIConfigLoader:
 
         logger.info(f"Prepared {len(streams)} streams and {len(rules)} rule sets")
 
+
         if self.debug:
             logger.debug(f"Streams={streams}")
             logger.debug(f"Rules={rules}")
