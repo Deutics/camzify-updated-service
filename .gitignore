@@ -1,0 +1,78 @@
+# =====================================
+# 🧠 Camzify Vision Service - .gitignore
+# =====================================
+
+# --- Python & Virtual Environment ---
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.py.class
+*.so
+*.dll
+*.dylib
+
+# Virtual environments
+.env/
+.venv/
+envs/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+
+# --- IDE / Editor Files ---
+.idea/
+*.iml
+*.sublime-workspace
+*.sublime-project
+
+# --- Logs & Runtime ---
+*.log
+logs/
+
+# --- Data / Media ---
+videos/
+snapshots_73/
+snapshots_74/
+*.jpg
+*.jpeg
+*.png
+*.mp4
+*.avi
+*.mkv
+
+# --- Models & Checkpoints ---
+models/
+checkpoints/
+weights/
+*.pt
+*.onnx
+*.bin
+*.xml
+*.engine
+*.trt
+*.pth
+*.tflite
+
+# --- Cache & Metadata ---
+.cache/
+__cache__/
+.pytest_cache/
+ipynb_checkpoints/
+.DS_Store
+Thumbs.db
+
+
+# --- Project Specific ---
+/capture/__pycache__/
+/features/__pycache__/
+/rule_engine/__pycache__/
+/utils/__pycache__/
+/data_models/__pycache__/
+
+#------- Files ------
+test.py
+structure.txt
+
