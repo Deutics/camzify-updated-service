@@ -4,8 +4,8 @@ import threading
 from typing import Optional, List, Dict, Any, Callable
 
 from MultiStreamVideoAnalyticsService import MultiStreamVideoAnalyticsService
-from api_config.APIConfigLoader import APIConfigLoader
-from config import settings
+from api_config.camzify_api_handler import CamzifyApiHandler
+from config import env_variables
 from utils.logger import get_logger
 
 logger = get_logger(__name__)
@@ -30,7 +30,7 @@ class ServiceController:
     async def start_service(self) -> bool:
         """
         Start the service if not already running.
-        Fetches configs using APIConfigLoader and instantiates MSVAS.
+        Fetches configs using CamzifyApiHandler and instantiates MSVAS.
         Returns True if started, False if already running.
         """
         # fast path check
@@ -40,25 +40,25 @@ class ServiceController:
                 return False
 
         base_url = settings.BASE_URL
-        token = settings.API_TOKEN
-        features = getattr(settings, "DEFAULT_FEATURES", ["line_intrusion_detector", "zone_intrusion_detector"])
+        token = env_variables.API_TOKEN
+        features = getattr(env_variables, "DEFAULT_FEATURES", ["line_intrusion_detector", "zone_intrusion_detector"])
 
         if not base_url or not token:
             logger.error("Missing BASE_URL or API_TOKEN in settings")
             raise RuntimeError("Missing BASE_URL or API_TOKEN")
 
         logger.info("Fetching initial configs to start service...")
-        loader = APIConfigLoader(base_url, token, debug=getattr(settings, "DEBUG", False))
+        loader = CamzifyApiHandler(base_url, token, debug=getattr(env_variables, "DEBUG", False))
         streams, rules = await loader.fetch_all_features(features, is_active=True)
 
         # instantiate service
         svc = MultiStreamVideoAnalyticsService(
             streams_config=streams,
             rules_config=rules,
-            model_path=getattr(settings, "MODEL_PATH", "models/yolo11n_custom.pt"),
+            model_path=getattr(env_variables, "MODEL_PATH", "models/yolo11n_custom.pt"),
             queue_size=getattr(settings, "QUEUE_SIZE", 50),
-            target_fps=getattr(settings, "TARGET_FPS", 20.0),
-            max_mixed_batch=getattr(settings, "MAX_MIXED_BATCH", 16),
+            target_fps=getattr(env_variables, "TARGET_FPS", 20.0),
+            max_mixed_batch=getattr(env_variables, "MAX_MIXED_BATCH", 16),
             width=getattr(settings, "DEFAULT_WIDTH", 640),
             height=getattr(settings, "DEFAULT_HEIGHT", 480),
         )
@@ -115,9 +115,9 @@ class ServiceController:
         # fetch new configs
         base_url = settings.BASE_URL
         token = settings.API_TOKEN
-        features = getattr(settings, "DEFAULT_FEATURES", ["line_intrusion_detector", "zone_intrusion_detector"])
+        features = getattr(env_variables, "DEFAULT_FEATURES", ["line_intrusion_detector", "zone_intrusion_detector"])
 
-        loader = APIConfigLoader(base_url, token, debug=getattr(settings, "DEBUG", False))
+        loader = CamzifyApiHandler(base_url, token, debug=getattr(settings, "DEBUG", False))
         streams, rules = await loader.fetch_all_features(features, is_active=True)
 
         # Transform streams list -> dict for store mutation

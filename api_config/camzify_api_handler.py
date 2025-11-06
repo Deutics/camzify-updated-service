@@ -1,15 +1,15 @@
-import aiohttp
+# api_config/camzify_api_handler.py
 import asyncio
 from typing import List, Dict, Any, Optional, Tuple
 
 from .ResolutionMapper import ResolutionMapper
 from .decrypter import decrypt_data
 from utils.logger import get_logger
+from .api_handler import ApiHandler  # new dependency
 
 logger = get_logger(__name__)
 
-
-class APIConfigLoader:
+class CamzifyApiHandler:
     """
     Loads feature configs from Camzify API and returns fully validated,
     normalized and pixel-mapped configuration dicts ready for the service.
@@ -27,48 +27,49 @@ class APIConfigLoader:
         default_height: int = 480,
         session_timeout: int = 15,
         debug: bool = False,
+        max_retries: int = 2,
+        retry_backoff: float = 0.5,
+        semaphore_limit: int = 10,
     ):
-        self.base_url = base_url.rstrip("/")
-        self.headers = {"Authorization": f"Bearer {token}", "Accept": "application/json"}
         self.default_width = default_width
         self.default_height = default_height
-        self._timeout = aiohttp.ClientTimeout(total=session_timeout)
         self.debug = debug
+        self._sem = asyncio.Semaphore(semaphore_limit)
 
+        # Replace direct aiohttp with reusable ApiHandler
+        self._api = ApiHandler(
+            base_url=base_url,
+            token=token,
+            timeout_seconds=session_timeout,
+            max_retries=max_retries,
+            retry_backoff=retry_backoff,
+            debug=debug,
+        )
         if self.debug:
             logger.setLevel("DEBUG")
 
-        logger.info(f"Initialized APIConfigLoader with base_url={self.base_url}")
+        logger.info("Initialized CamzifyApiHandler with ApiHandler")
 
     def apply_partial_update(self, configs: Dict[str, Any], stream_id: str, updates: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Merge updates into the existing stream config.
-        Supports nested updates like 'line_intrusion.points'.
-        """
         import copy
         new_cfgs = copy.deepcopy(configs)
         stream_cfg = new_cfgs.setdefault(stream_id, {})
-
         for key, value in updates.items():
             parts = key.split(".")
             target = stream_cfg
             for p in parts[:-1]:
                 target = target.setdefault(p, {})
             target[parts[-1]] = value
-
         return new_cfgs
 
-    # ------------------------------------------------------------------
     async def _fetch_feature_configs(
         self,
-        session: aiohttp.ClientSession,
         feature: str,
         is_active: Optional[bool] = None,
         stream__in: Optional[List[int]] = None
     ) -> List[Dict[str, Any]]:
         """Fetch a single feature configs and convert to pixel space."""
-        endpoint = f"analytic/{feature}/instance"
-        url = f"{self.base_url}/api/v1/instance/stream/{endpoint}"
+        path = f"/api/v1/instance/stream/analytic/{feature}/instance"
 
         params: Dict[str, str] = {}
         if is_active is not None:
@@ -77,12 +78,11 @@ class APIConfigLoader:
             params["stream__in"] = ",".join(map(str, stream__in))
 
         if self.debug:
-            logger.debug(f"Fetching {feature} configs from {url} with params={params}")
+            logger.debug(f"Fetching {feature} configs from {path} with params={params}")
 
         try:
-            async with session.get(url, headers=self.headers, params=params) as resp:
-                resp.raise_for_status()
-                data = await resp.json()
+            async with self._sem:
+                data = await self._api.get(path, params=params, expected_status=(200,))
         except Exception as e:
             logger.error(f"Failed to fetch {feature} configs: {e}", exc_info=True)
             return []
@@ -103,8 +103,8 @@ class APIConfigLoader:
                 try:
                     cam_meta = stream_info.get("camera_metadata") or {}
                     streams_meta = cam_meta.get("streams") or []
-                    if streams_meta and isinstance(streams_meta, list) and len(streams_meta) > 0:
-                        first_stream = streams_meta[0] or {}
+                    if streams_meta and isinstance(streams_meta, list):
+                        first_stream = (streams_meta[0] or {}) if streams_meta else {}
                         width = int(first_stream.get("width") or width)
                         height = int(first_stream.get("height") or height)
                 except Exception:
@@ -175,7 +175,6 @@ class APIConfigLoader:
                     "is_active": is_active_val,
                     "instance_id": instance_id,
                 }
-
                 parsed_results.append(parsed)
 
             except Exception as e:
@@ -187,7 +186,6 @@ class APIConfigLoader:
 
         return parsed_results
 
-    # ------------------------------------------------------------------
     async def fetch_all_features(
         self,
         features: List[str],
@@ -197,15 +195,18 @@ class APIConfigLoader:
         """Fetch configurations for multiple features concurrently."""
         logger.info(f"Fetching all features: {features}")
 
-        async with aiohttp.ClientSession(timeout=self._timeout) as session:
-            tasks = [
-                self._fetch_feature_configs(session, f, is_active, stream__in)
-                for f in features
-            ]
-            results = await asyncio.gather(*tasks, return_exceptions=False)
+        tasks = [
+            self._fetch_feature_configs(feature, is_active, stream__in)
+            for feature in features
+        ]
+        # tolerate per-feature failures
+        results = await asyncio.gather(*tasks, return_exceptions=True)
 
         flat: List[Dict[str, Any]] = []
-        for r in results:
+        for idx, r in enumerate(results):
+            if isinstance(r, Exception):
+                logger.error(f"Feature fetch failed for {features[idx]}: {r}", exc_info=True)
+                continue
             if isinstance(r, list):
                 flat.extend(r)
 
@@ -222,7 +223,8 @@ class APIConfigLoader:
             w = int(cfg.get("camera_width") or self.default_width)
             h = int(cfg.get("camera_height") or self.default_height)
 
-            if sid not in streams_map:
+            existing = streams_map.get(sid)
+            if not existing:
                 streams_map[sid] = {
                     "stream_id": sid,
                     "rtsp_stream_url": rtsp_url,
@@ -231,12 +233,12 @@ class APIConfigLoader:
                     "camera_height": h,
                 }
             else:
-                existing = streams_map[sid]
                 if (w * h) > (existing["camera_width"] * existing["camera_height"]):
                     existing["camera_width"] = w
                     existing["camera_height"] = h
-                if not existing.get("rtsp_url") and existing.get("https_url") and rtsp_url and https_url:
+                if rtsp_url:
                     existing["rtsp_stream_url"] = rtsp_url
+                if https_url:
                     existing["https_stream_url"] = https_url
 
             feature_type = cfg.get("feature_type")
@@ -274,9 +276,16 @@ class APIConfigLoader:
 
         logger.info(f"Prepared {len(streams)} streams and {len(rules)} rule sets")
 
-
         if self.debug:
             logger.debug(f"Streams={streams}")
             logger.debug(f"Rules={rules}")
 
         return streams, rules
+
+    async def __aenter__(self):
+        # allow: async with CamzifyApiHandler(...) as loader:
+        await self._api.__aenter__()
+        return self
+
+    async def __aexit__(self, exc_type, exc, tb):
+        await self._api.__aexit__(exc_type, exc, tb)

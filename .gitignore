@@ -44,7 +44,7 @@ snapshots_74/
 *.mkv
 
 # --- Models & Checkpoints ---
-models/
+ObjectDetector/yolov11/models/
 checkpoints/
 weights/
 *.pt

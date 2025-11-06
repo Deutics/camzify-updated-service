@@ -7,7 +7,7 @@ import threading
 from typing import Any, Optional, Union
 
 from SafeCounter import SafeCounter
-from capture.StreamCapture import ImprovedStreamCapture
+from capture.StreamCapture import StreamCapture
 # from capture.FFmpegCapture import FFmpegStreamCapture as ImprovedStreamCapture
 from capture.MotionDetector import MotionDetection
 from capture.utils import safe_put_queue, downscale_bgr, to_gray
@@ -37,7 +37,7 @@ def capture_worker(
 
     logger.info(f"{stream_id}: worker started ({width}x{height})")
 
-    cap = ImprovedStreamCapture(rtsp_url, https_url, width=width, height=height)
+    cap = StreamCapture(rtsp_url, https_url, width=width, height=height)
     frame_counter = SafeCounter()
 
     motion_detector = MotionDetection(

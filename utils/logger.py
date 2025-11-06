@@ -51,7 +51,7 @@ def _configure_logging() -> None:
     console_handler.setFormatter(_FORMATTER)
 
     base_logger = logging.getLogger(_LOG_NAMESPACE)
-    base_logger.setLevel(logging.INFO)
+    base_logger.setLevel(logging.DEBUG)
     base_logger.propagate = False
 
     # Attach both handlers

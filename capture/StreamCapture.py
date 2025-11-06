@@ -8,7 +8,7 @@ from utils.logger import get_logger
 logger = get_logger(__name__)
 
 
-class ImprovedStreamCapture:
+class StreamCapture:
     """
     Advanced OpenCV-based RTSP/HTTPS capture with internal watchdog and auto-recovery.
     Scalable for large multi-stream systems (100+ streams).

@@ -6,7 +6,7 @@ from typing import List, Dict, Any
 # Core components
 from capture.MultiprocessCaptureManager import MultiprocessCaptureManager
 from PriorityThreadSafeQueue import PriorityThreadSafeQueue
-from ObjectDetector.SharedInferenceEngine import SharedInferenceEngine
+from objectdetectors.object_detector import ObjectDetector
 from tracking.TrackedObjectManager import TrackedObjectManager
 from RuleConfigStore import RuleConfigStore
 from SafeCounter import SafeCounter
@@ -46,7 +46,7 @@ class MultiStreamVideoAnalyticsService:
         self,
         streams_config: List[Dict[str, Any]],
         rules_config: Dict[str, Any],
-        model_path: str = "yolov8n.pt",
+        model_dir: str = "yolov11",
         queue_size: int = 30,
         target_fps: float = 15.0,
         max_mixed_batch: int = 16,
@@ -96,8 +96,8 @@ class MultiStreamVideoAnalyticsService:
             default_height=self.height,
         )
 
-        self.shared_inference = SharedInferenceEngine(
-            model_path=model_path,
+        self.shared_inference = ObjectDetector(
+            model_dir=model_dir,
             inference_imgsz=320,
             confidence_threshold=0.25,
             max_batch_size=int(max_mixed_batch),
