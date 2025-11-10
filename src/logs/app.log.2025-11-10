@@ -1,0 +1,1129 @@
+2025-11-10 11:48:47 [INFO] [CamzifyService.src.core.service_runner] Launching service via asyncio runner...
+2025-11-10 11:48:47 [INFO] [CamzifyService.src.core.service_runner] Initializing MultiStreamVideoAnalyticsService...
+2025-11-10 11:48:47 [INFO] [CamzifyService.src.core.service_runner] Using base URL: https://api.camzify.com
+2025-11-10 11:48:47 [INFO] [CamzifyService.src.api.api_handler] ApiHandler initialized for base_url=https://api.camzify.com
+2025-11-10 11:48:47 [INFO] [CamzifyService.src.api.camzify_api_handler] Initialized CamzifyApiHandler with ApiHandler
+2025-11-10 11:48:47 [INFO] [CamzifyService.src.api.camzify_api_handler] Fetching all features: ['line_intrusion_detector', 'zone_intrusion_detector']
+2025-11-10 11:48:49 [INFO] [CamzifyService.src.api.camzify_api_handler] Prepared 2 streams and 2 rule sets
+2025-11-10 11:48:49 [INFO] [CamzifyService.src.engine.rule_engine_manager] Subscribed to on_rules_updated, on_stream_updated, and on_stream_removed (if available)
+2025-11-10 11:48:49 [INFO] [CamzifyService.src.core.multi_stream_video_analytics_service] Subscribed to config store events
+2025-11-10 11:48:53 [INFO] [CamzifyService.objectdetectors.yolov11.yolo_detector] [Loader:YOLOv11] loaded objectdetectors/yolov11/models/yolo11n_custom.pt, imgsz=320
+2025-11-10 11:48:53 [INFO] [CamzifyService.src.services.detection.object_detector] [SharedInference] Loaded backend yolov11 via objectdetectors.yolov11.yolo_detector.YoloLoader
+2025-11-10 11:48:53 [INFO] [CamzifyService.src.streaming.multiprocess_capture_manager] [CAPMAN] Started process for 74 (640x360)
+2025-11-10 11:48:53 [INFO] [CamzifyService.src.streaming.multiprocess_capture_manager] [CAPMAN] Started process for 73 (640x360)
+2025-11-10 11:48:53 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] Started forwarder for stream 74
+2025-11-10 11:48:53 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] Started forwarder for stream 73
+2025-11-10 11:48:53 [INFO] [CamzifyService.src.core.multi_stream_video_analytics_service] Service started successfully.
+2025-11-10 11:48:53 [INFO] [CamzifyService.src.core.service_runner] [MSVAS] Service started successfully.
+2025-11-10 11:48:54 [INFO] [CamzifyService.src.streaming.capture_worker] 73: worker started (640x360)
+2025-11-10 11:48:54 [INFO] [CamzifyService.src.streaming.stream_capture] Stream released
+2025-11-10 11:48:54 [INFO] [CamzifyService.src.streaming.capture_worker] 74: worker started (640x360)
+2025-11-10 11:48:54 [INFO] [CamzifyService.src.streaming.stream_capture] Stream released
+2025-11-10 11:48:58 [INFO] [CamzifyService.src.streaming.stream_capture] Stream opened: https://media.camzify.live:8888/74/index.m3u8
+2025-11-10 11:48:58 [DEBUG] [CamzifyService.src.streaming.capture_worker] 73: motion detected, switching to ACTIVE mode
+2025-11-10 11:48:58 [DEBUG] [CamzifyService.src.streaming.capture_worker] 74: motion detected, switching to ACTIVE mode
+2025-11-10 11:48:59 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 74] Forwarded=1 | Dropped=0 | Thinned=0 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:48:59 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 73] Forwarded=1 | Dropped=0 | Thinned=0 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:48:59 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 11:49:00 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 74] Forwarded=74 | Dropped=0 | Thinned=33 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:49:00 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 73] Forwarded=74 | Dropped=0 | Thinned=33 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:49:00 [DEBUG] [CamzifyService.src.streaming.capture_worker] 73: switching back to SENSOR mode
+2025-11-10 11:49:00 [DEBUG] [CamzifyService.src.streaming.capture_worker] 74: switching back to SENSOR mode
+2025-11-10 11:49:00 [DEBUG] [CamzifyService.src.services.filtering.size_threshold_cache] Recomputed thresholds for stream 73
+2025-11-10 11:49:00 [DEBUG] [CamzifyService.src.services.filtering.size_threshold_cache] Recomputed thresholds for stream 74
+2025-11-10 11:49:00 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:00 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:00 [INFO] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] creating StreamRuleEngine for 73
+2025-11-10 11:49:00 [INFO] [CamzifyService.src.engine.stream_rule_engine] [StreamRuleEngine:73] loading features from config; found: ['line_intrusion']
+2025-11-10 11:49:00 [DEBUG] [CamzifyService.src.engine.stream_rule_engine] [StreamRuleEngine:73] worker started, features=[('line_intrusion', 0)]
+2025-11-10 11:49:00 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:00 [INFO] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] creating StreamRuleEngine for 74
+2025-11-10 11:49:00 [INFO] [CamzifyService.src.engine.stream_rule_engine] [StreamRuleEngine:74] loading features from config; found: ['line_intrusion']
+2025-11-10 11:49:00 [DEBUG] [CamzifyService.src.engine.stream_rule_engine] [StreamRuleEngine:74] worker started, features=[('line_intrusion', 0)]
+2025-11-10 11:49:00 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 11:49:01 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:01 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:01 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:01 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:01 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:01 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 11:49:01 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:01 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:01 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:01 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:01 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:01 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 11:49:02 [DEBUG] [CamzifyService.src.streaming.capture_worker] 73: motion detected, switching to ACTIVE mode
+2025-11-10 11:49:02 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 73] Forwarded=7 | Dropped=0 | Thinned=6 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:49:02 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:02 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:02 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:02 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:02 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:02 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 11:49:03 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 73] Forwarded=47 | Dropped=0 | Thinned=44 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:49:03 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:03 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:03 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:03 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:03 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:03 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 11:49:03 [DEBUG] [CamzifyService.src.streaming.capture_worker] 73: switching back to SENSOR mode
+2025-11-10 11:49:03 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:03 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:03 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:03 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:03 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:03 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 11:49:04 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:04 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:04 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:04 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:04 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:04 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 11:49:05 [DEBUG] [CamzifyService.src.streaming.capture_worker] 73: motion detected, switching to ACTIVE mode
+2025-11-10 11:49:05 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 73] Forwarded=23 | Dropped=0 | Thinned=23 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:49:05 [DEBUG] [CamzifyService.src.streaming.capture_worker] 74: motion detected, switching to ACTIVE mode
+2025-11-10 11:49:05 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 74] Forwarded=11 | Dropped=0 | Thinned=10 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:49:05 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:05 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:05 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:05 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:05 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:05 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 11:49:06 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 73] Forwarded=27 | Dropped=0 | Thinned=27 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:49:06 [DEBUG] [CamzifyService.src.streaming.capture_worker] 73: switching back to SENSOR mode
+2025-11-10 11:49:06 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 74] Forwarded=40 | Dropped=0 | Thinned=7 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:49:07 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:07 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:07 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:07 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:07 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:07 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 11:49:07 [DEBUG] [CamzifyService.src.streaming.capture_worker] 74: switching back to SENSOR mode
+2025-11-10 11:49:07 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:07 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:07 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:07 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:07 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:07 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 11:49:08 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:08 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:08 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:08 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:08 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:08 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 11:49:09 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:09 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:09 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:09 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:09 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:09 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 11:49:09 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:09 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:09 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:09 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:09 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:09 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 11:49:10 [DEBUG] [CamzifyService.src.streaming.capture_worker] 73: motion detected, switching to ACTIVE mode
+2025-11-10 11:49:10 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 73] Forwarded=12 | Dropped=0 | Thinned=12 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:49:10 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:10 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:10 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:10 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:10 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:10 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 11:49:10 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:10 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:10 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:10 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:10 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:10 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 11:49:11 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 73] Forwarded=61 | Dropped=0 | Thinned=45 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:49:11 [DEBUG] [CamzifyService.src.streaming.capture_worker] 73: switching back to SENSOR mode
+2025-11-10 11:49:11 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:11 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:11 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:11 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:11 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:11 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 11:49:12 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:12 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:12 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:12 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:12 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:12 [DEBUG] [CamzifyService.src.streaming.capture_worker] 74: motion detected, switching to ACTIVE mode
+2025-11-10 11:49:12 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 74] Forwarded=20 | Dropped=0 | Thinned=20 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:49:12 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 11:49:13 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:13 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:13 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:13 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:13 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:13 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 11:49:13 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 74] Forwarded=84 | Dropped=0 | Thinned=46 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:49:13 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:13 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:13 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:13 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:13 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:13 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 11:49:14 [DEBUG] [CamzifyService.src.streaming.capture_worker] 74: switching back to SENSOR mode
+2025-11-10 11:49:14 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:14 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:14 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:14 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:14 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:14 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 11:49:14 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:14 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:14 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:14 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:14 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:14 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 11:49:15 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:15 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:15 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:15 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:15 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:15 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 11:49:15 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:15 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:15 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:15 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:15 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:15 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 11:49:16 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:16 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:16 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:16 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:16 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:16 [DEBUG] [CamzifyService.src.streaming.capture_worker] 73: motion detected, switching to ACTIVE mode
+2025-11-10 11:49:16 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 73] Forwarded=23 | Dropped=0 | Thinned=22 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:49:17 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 11:49:17 [DEBUG] [CamzifyService.src.streaming.capture_worker] 74: motion detected, switching to ACTIVE mode
+2025-11-10 11:49:17 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 74] Forwarded=20 | Dropped=0 | Thinned=20 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:49:17 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 73] Forwarded=74 | Dropped=0 | Thinned=35 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:49:17 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:17 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 1 tracked objects passed to dispatcher.
+2025-11-10 11:49:17 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:17 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:17 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:17 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 11:49:18 [DEBUG] [CamzifyService.src.streaming.capture_worker] 73: switching back to SENSOR mode
+2025-11-10 11:49:18 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:18 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 1 tracked objects passed to dispatcher.
+2025-11-10 11:49:18 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:18 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:18 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:18 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 11:49:18 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 74] Forwarded=60 | Dropped=0 | Thinned=40 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:49:19 [DEBUG] [CamzifyService.src.streaming.capture_worker] 74: switching back to SENSOR mode
+2025-11-10 11:49:19 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:19 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:19 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:19 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:19 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:19 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 11:49:19 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:19 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:19 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:19 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:19 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:19 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 11:49:20 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:20 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:20 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:20 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:20 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:20 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 11:49:20 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:20 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:20 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:20 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:20 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:20 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 11:49:20 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:20 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:20 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:20 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:20 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:20 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 11:49:21 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:21 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:21 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:21 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:21 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:21 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 11:49:21 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:21 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:21 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:21 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:21 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:21 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 11:49:22 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:22 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:22 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:22 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:22 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:23 [DEBUG] [CamzifyService.src.streaming.capture_worker] 73: motion detected, switching to ACTIVE mode
+2025-11-10 11:49:23 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 73] Forwarded=41 | Dropped=0 | Thinned=41 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:49:23 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 11:49:23 [DEBUG] [CamzifyService.src.streaming.capture_worker] 74: motion detected, switching to ACTIVE mode
+2025-11-10 11:49:23 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 74] Forwarded=25 | Dropped=0 | Thinned=24 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:49:24 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 73] Forwarded=76 | Dropped=0 | Thinned=36 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:49:24 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:24 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:24 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:24 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:24 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:24 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 11:49:24 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 74] Forwarded=63 | Dropped=0 | Thinned=30 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:49:25 [DEBUG] [CamzifyService.src.streaming.capture_worker] 74: switching back to SENSOR mode
+2025-11-10 11:49:25 [DEBUG] [CamzifyService.src.streaming.capture_worker] 73: switching back to SENSOR mode
+2025-11-10 11:49:25 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:25 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:25 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:25 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:25 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:25 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 11:49:25 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:25 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:25 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:25 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:25 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:25 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 11:49:26 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:26 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:26 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:26 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:26 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:26 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 11:49:26 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:26 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:26 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:26 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:26 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:26 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 11:49:27 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 11:49:27 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:27 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 11:49:27 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 11:49:27 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 11:49:27 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 11:49:27 [INFO] [CamzifyService.src.streaming.stream_capture] Stream released
+2025-11-10 11:49:27 [INFO] [CamzifyService.src.streaming.capture_worker] 74: worker stopped.
+2025-11-10 11:49:27 [INFO] [CamzifyService.src.streaming.stream_capture] Stream released
+2025-11-10 11:49:27 [INFO] [CamzifyService.src.streaming.capture_worker] 73: worker stopped.
+2025-11-10 11:49:27 [ERROR] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 74] frame processing error: cannot unpack non-iterable NoneType object
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\camzify-updated-service\src\pipelines\forwarder_worker.py", line 66, in run
+    jpeg_bytes, ts, sid, frame_num = payload
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: cannot unpack non-iterable NoneType object
+2025-11-10 11:49:27 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 74] Forwarded=26 | Dropped=1 | Thinned=27 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:49:27 [ERROR] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 73] frame processing error: cannot unpack non-iterable NoneType object
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\camzify-updated-service\src\pipelines\forwarder_worker.py", line 66, in run
+    jpeg_bytes, ts, sid, frame_num = payload
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: cannot unpack non-iterable NoneType object
+2025-11-10 11:49:27 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 73] Forwarded=46 | Dropped=1 | Thinned=47 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 11:49:27 [INFO] [CamzifyService.src.streaming.multiprocess_capture_manager] [CAPMAN] All capture workers stopped.
+2025-11-10 11:49:27 [INFO] [CamzifyService.src.services.filtering.size_threshold_cache] Cleared all cached thresholds
+2025-11-10 11:49:27 [ERROR] [CamzifyService.rule_engine_utils] safe_call failed: 'NoneType' object has no attribute 'copy'
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\camzify-updated-service\src\engine\utils.py", line 25, in safe_call
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\camzify-updated-service\src\engine\stream_rule_engine.py", line 198, in <lambda>
+    safe_call(lambda: self.visualizer.update_frame_visualization(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\camzify-updated-service\src\utils\live_visualization.py", line 23, in update_frame_visualization
+    self.latest_frame = frame.copy()
+                        ^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'copy'
+2025-11-10 11:49:27 [INFO] [CamzifyService.src.engine.features.line_intrusion_detector.LineIntrusionDetector] [ILD:73] LineIntrusionDetector shutdown
+2025-11-10 11:49:27 [ERROR] [CamzifyService.rule_engine_utils] safe_call failed: 'NoneType' object has no attribute 'copy'
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\camzify-updated-service\src\engine\utils.py", line 25, in safe_call
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\camzify-updated-service\src\engine\stream_rule_engine.py", line 198, in <lambda>
+    safe_call(lambda: self.visualizer.update_frame_visualization(
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\camzify-updated-service\src\utils\live_visualization.py", line 23, in update_frame_visualization
+    self.latest_frame = frame.copy()
+                        ^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'copy'
+2025-11-10 11:49:27 [INFO] [CamzifyService.src.engine.features.line_intrusion_detector.LineIntrusionDetector] [ILD:74] LineIntrusionDetector shutdown
+2025-11-10 11:49:27 [INFO] [CamzifyService.src.engine.rule_engine_manager] All engines stopped successfully
+2025-11-10 11:49:27 [ERROR] [CamzifyService.src.services.detection.object_detector] [SharedInference] parse_result failed for one frame
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\camzify-updated-service\src\services\detection\object_detector.py", line 97, in _process_batch_internal
+    detections = self.loader.parse_result(res)  # normalized detections list
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'parse_result'
+2025-11-10 11:49:27 [ERROR] [CamzifyService.src.services.detection.object_detector] [SharedInference] parse_result failed for one frame
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\camzify-updated-service\src\services\detection\object_detector.py", line 97, in _process_batch_internal
+    detections = self.loader.parse_result(res)  # normalized detections list
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'parse_result'
+2025-11-10 11:49:27 [ERROR] [CamzifyService.src.services.detection.object_detector] [SharedInference] parse_result failed for one frame
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\camzify-updated-service\src\services\detection\object_detector.py", line 97, in _process_batch_internal
+    detections = self.loader.parse_result(res)  # normalized detections list
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'parse_result'
+2025-11-10 11:49:27 [ERROR] [CamzifyService.src.services.detection.object_detector] [SharedInference] parse_result failed for one frame
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\camzify-updated-service\src\services\detection\object_detector.py", line 97, in _process_batch_internal
+    detections = self.loader.parse_result(res)  # normalized detections list
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'parse_result'
+2025-11-10 11:49:27 [ERROR] [CamzifyService.src.services.detection.object_detector] [SharedInference] parse_result failed for one frame
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\camzify-updated-service\src\services\detection\object_detector.py", line 97, in _process_batch_internal
+    detections = self.loader.parse_result(res)  # normalized detections list
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'parse_result'
+2025-11-10 11:49:27 [ERROR] [CamzifyService.src.services.detection.object_detector] [SharedInference] parse_result failed for one frame
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\camzify-updated-service\src\services\detection\object_detector.py", line 97, in _process_batch_internal
+    detections = self.loader.parse_result(res)  # normalized detections list
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'parse_result'
+2025-11-10 11:49:27 [ERROR] [CamzifyService.src.services.detection.object_detector] [SharedInference] parse_result failed for one frame
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\camzify-updated-service\src\services\detection\object_detector.py", line 97, in _process_batch_internal
+    detections = self.loader.parse_result(res)  # normalized detections list
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'parse_result'
+2025-11-10 11:49:27 [ERROR] [CamzifyService.src.services.detection.object_detector] [SharedInference] parse_result failed for one frame
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\camzify-updated-service\src\services\detection\object_detector.py", line 97, in _process_batch_internal
+    detections = self.loader.parse_result(res)  # normalized detections list
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'parse_result'
+2025-11-10 11:49:27 [ERROR] [CamzifyService.src.services.detection.object_detector] [SharedInference] parse_result failed for one frame
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\camzify-updated-service\src\services\detection\object_detector.py", line 97, in _process_batch_internal
+    detections = self.loader.parse_result(res)  # normalized detections list
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'parse_result'
+2025-11-10 11:49:27 [ERROR] [CamzifyService.src.services.detection.object_detector] [SharedInference] parse_result failed for one frame
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\camzify-updated-service\src\services\detection\object_detector.py", line 97, in _process_batch_internal
+    detections = self.loader.parse_result(res)  # normalized detections list
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'parse_result'
+2025-11-10 11:49:27 [ERROR] [CamzifyService.src.services.detection.object_detector] [SharedInference] parse_result failed for one frame
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\camzify-updated-service\src\services\detection\object_detector.py", line 97, in _process_batch_internal
+    detections = self.loader.parse_result(res)  # normalized detections list
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'parse_result'
+2025-11-10 11:49:27 [ERROR] [CamzifyService.src.services.detection.object_detector] [SharedInference] parse_result failed for one frame
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\camzify-updated-service\src\services\detection\object_detector.py", line 97, in _process_batch_internal
+    detections = self.loader.parse_result(res)  # normalized detections list
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'parse_result'
+2025-11-10 11:49:27 [DEBUG] [CamzifyService.src.services.filtering.size_threshold_cache] Recomputed thresholds for stream 73
+2025-11-10 11:49:27 [DEBUG] [CamzifyService.src.services.filtering.size_threshold_cache] Recomputed thresholds for stream 74
+2025-11-10 11:49:27 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=[]
+2025-11-10 11:49:27 [INFO] [CamzifyService.src.core.multi_stream_video_analytics_service] Service stopped cleanly.
+2025-11-10 11:49:27 [INFO] [CamzifyService.src.core.service_runner] [MSVAS] Service stopped cleanly.
+2025-11-10 13:15:53 [INFO] [CamzifyService.src.core.service_runner] Launching service via asyncio runner...
+2025-11-10 13:15:53 [INFO] [CamzifyService.src.core.service_runner] Initializing MultiStreamVideoAnalyticsService...
+2025-11-10 13:15:53 [INFO] [CamzifyService.src.core.service_runner] Using base URL: https://api.camzify.com
+2025-11-10 13:15:53 [INFO] [CamzifyService.src.api.api_handler] ApiHandler initialized for base_url=https://api.camzify.com
+2025-11-10 13:15:53 [INFO] [CamzifyService.src.api.camzify_api_handler] Initialized CamzifyApiHandler with ApiHandler
+2025-11-10 13:15:53 [INFO] [CamzifyService.src.api.camzify_api_handler] Fetching all features: ['line_intrusion_detector', 'zone_intrusion_detector']
+2025-11-10 13:15:55 [INFO] [CamzifyService.src.api.camzify_api_handler] Prepared 2 streams and 2 rule sets
+2025-11-10 13:15:55 [INFO] [CamzifyService.src.engine.rule_engine_manager] Subscribed to on_rules_updated, on_stream_updated, and on_stream_removed (if available)
+2025-11-10 13:15:55 [INFO] [CamzifyService.src.core.multi_stream_video_analytics_service] Subscribed to config store events
+2025-11-10 13:15:55 [ERROR] [CamzifyService.src.services.detection.object_detector] [SharedInference] Failed to load backend 'yolov11': No module named 'objectdetectors'
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\services\detection\object_detector.py", line 63, in start
+    mod = importlib.import_module(module_path)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PYTHON\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1310, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1310, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'objectdetectors'
+2025-11-10 13:15:55 [INFO] [CamzifyService.src.streaming.multiprocess_capture_manager] [CAPMAN] All capture workers stopped.
+2025-11-10 13:15:55 [INFO] [CamzifyService.src.services.filtering.size_threshold_cache] Cleared all cached thresholds
+2025-11-10 13:15:55 [INFO] [CamzifyService.src.engine.rule_engine_manager] All engines stopped successfully
+2025-11-10 13:15:55 [INFO] [CamzifyService.src.core.multi_stream_video_analytics_service] Service stopped cleanly.
+2025-11-10 13:15:55 [INFO] [CamzifyService.src.core.service_runner] [MSVAS] Service stopped cleanly.
+2025-11-10 13:21:06 [INFO] [CamzifyService.src.core.service_runner] Launching service via asyncio runner...
+2025-11-10 13:21:06 [INFO] [CamzifyService.src.core.service_runner] Initializing MultiStreamVideoAnalyticsService...
+2025-11-10 13:21:06 [INFO] [CamzifyService.src.core.service_runner] Using base URL: https://api.camzify.com
+2025-11-10 13:21:06 [INFO] [CamzifyService.src.api.api_handler] ApiHandler initialized for base_url=https://api.camzify.com
+2025-11-10 13:21:06 [INFO] [CamzifyService.src.api.camzify_api_handler] Initialized CamzifyApiHandler with ApiHandler
+2025-11-10 13:21:06 [INFO] [CamzifyService.src.api.camzify_api_handler] Fetching all features: ['line_intrusion_detector', 'zone_intrusion_detector']
+2025-11-10 13:21:07 [INFO] [CamzifyService.src.api.camzify_api_handler] Prepared 2 streams and 2 rule sets
+2025-11-10 13:21:07 [INFO] [CamzifyService.src.engine.rule_engine_manager] Subscribed to on_rules_updated, on_stream_updated, and on_stream_removed (if available)
+2025-11-10 13:21:07 [INFO] [CamzifyService.src.core.multi_stream_video_analytics_service] Subscribed to config store events
+2025-11-10 13:21:07 [ERROR] [CamzifyService.src.services.objectdetectors.object_detector] [SharedInference] Failed to load backend 'yolov11': No module named 'services'
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\services\objectdetectors\object_detector.py", line 63, in start
+    mod = importlib.import_module(module_path)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PYTHON\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1310, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1310, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1310, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'services'
+2025-11-10 13:21:07 [INFO] [CamzifyService.src.streaming.multiprocess_capture_manager] [CAPMAN] All capture workers stopped.
+2025-11-10 13:21:07 [INFO] [CamzifyService.src.services.filtering.size_threshold_cache] Cleared all cached thresholds
+2025-11-10 13:21:07 [INFO] [CamzifyService.src.engine.rule_engine_manager] All engines stopped successfully
+2025-11-10 13:21:07 [INFO] [CamzifyService.src.core.multi_stream_video_analytics_service] Service stopped cleanly.
+2025-11-10 13:21:07 [INFO] [CamzifyService.src.core.service_runner] [MSVAS] Service stopped cleanly.
+2025-11-10 13:21:38 [INFO] [CamzifyService.src.core.service_runner] Launching service via asyncio runner...
+2025-11-10 13:21:38 [INFO] [CamzifyService.src.core.service_runner] Initializing MultiStreamVideoAnalyticsService...
+2025-11-10 13:21:38 [INFO] [CamzifyService.src.core.service_runner] Using base URL: https://api.camzify.com
+2025-11-10 13:21:38 [INFO] [CamzifyService.src.api.api_handler] ApiHandler initialized for base_url=https://api.camzify.com
+2025-11-10 13:21:38 [INFO] [CamzifyService.src.api.camzify_api_handler] Initialized CamzifyApiHandler with ApiHandler
+2025-11-10 13:21:38 [INFO] [CamzifyService.src.api.camzify_api_handler] Fetching all features: ['line_intrusion_detector', 'zone_intrusion_detector']
+2025-11-10 13:21:39 [INFO] [CamzifyService.src.api.camzify_api_handler] Prepared 2 streams and 2 rule sets
+2025-11-10 13:21:39 [INFO] [CamzifyService.src.engine.rule_engine_manager] Subscribed to on_rules_updated, on_stream_updated, and on_stream_removed (if available)
+2025-11-10 13:21:39 [INFO] [CamzifyService.src.core.multi_stream_video_analytics_service] Subscribed to config store events
+2025-11-10 13:21:39 [ERROR] [CamzifyService.src.services.objectdetectors.object_detector] [SharedInference] Failed to load backend 'yolov11': No module named 'objectdetectors'
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\services\objectdetectors\object_detector.py", line 63, in start
+    mod = importlib.import_module(module_path)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PYTHON\Lib\importlib\__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1310, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1310, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1324, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'objectdetectors'
+2025-11-10 13:21:39 [INFO] [CamzifyService.src.streaming.multiprocess_capture_manager] [CAPMAN] All capture workers stopped.
+2025-11-10 13:21:39 [INFO] [CamzifyService.src.services.filtering.size_threshold_cache] Cleared all cached thresholds
+2025-11-10 13:21:39 [INFO] [CamzifyService.src.engine.rule_engine_manager] All engines stopped successfully
+2025-11-10 13:21:39 [INFO] [CamzifyService.src.core.multi_stream_video_analytics_service] Service stopped cleanly.
+2025-11-10 13:21:39 [INFO] [CamzifyService.src.core.service_runner] [MSVAS] Service stopped cleanly.
+2025-11-10 13:22:38 [INFO] [CamzifyService.src.core.service_runner] Launching service via asyncio runner...
+2025-11-10 13:22:38 [INFO] [CamzifyService.src.core.service_runner] Initializing MultiStreamVideoAnalyticsService...
+2025-11-10 13:22:38 [INFO] [CamzifyService.src.core.service_runner] Using base URL: https://api.camzify.com
+2025-11-10 13:22:38 [INFO] [CamzifyService.src.api.api_handler] ApiHandler initialized for base_url=https://api.camzify.com
+2025-11-10 13:22:38 [INFO] [CamzifyService.src.api.camzify_api_handler] Initialized CamzifyApiHandler with ApiHandler
+2025-11-10 13:22:38 [INFO] [CamzifyService.src.api.camzify_api_handler] Fetching all features: ['line_intrusion_detector', 'zone_intrusion_detector']
+2025-11-10 13:22:40 [INFO] [CamzifyService.src.api.camzify_api_handler] Prepared 2 streams and 2 rule sets
+2025-11-10 13:22:40 [INFO] [CamzifyService.src.engine.rule_engine_manager] Subscribed to on_rules_updated, on_stream_updated, and on_stream_removed (if available)
+2025-11-10 13:22:40 [INFO] [CamzifyService.src.core.multi_stream_video_analytics_service] Subscribed to config store events
+2025-11-10 13:22:40 [ERROR] [CamzifyService.src.services.objectdetectors.object_detector] [SharedInference] Failed to load backend 'yolov11': ultralytics.YOLO not available
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\services\objectdetectors\object_detector.py", line 70, in start
+    self.loader.load()
+  File "E:\PyCharmProjects\test_structure_camzify\src\services\objectdetectors\yolov11\yolo_detector.py", line 25, in load
+    raise RuntimeError("ultralytics.YOLO not available")
+RuntimeError: ultralytics.YOLO not available
+2025-11-10 13:22:40 [INFO] [CamzifyService.src.streaming.multiprocess_capture_manager] [CAPMAN] All capture workers stopped.
+2025-11-10 13:22:40 [INFO] [CamzifyService.src.services.filtering.size_threshold_cache] Cleared all cached thresholds
+2025-11-10 13:22:40 [INFO] [CamzifyService.src.engine.rule_engine_manager] All engines stopped successfully
+2025-11-10 13:22:40 [INFO] [CamzifyService.src.core.multi_stream_video_analytics_service] Service stopped cleanly.
+2025-11-10 13:22:40 [INFO] [CamzifyService.src.core.service_runner] [MSVAS] Service stopped cleanly.
+2025-11-10 13:30:20 [INFO] [CamzifyService.src.core.service_runner] Launching service via asyncio runner...
+2025-11-10 13:30:20 [INFO] [CamzifyService.src.core.service_runner] Initializing MultiStreamVideoAnalyticsService...
+2025-11-10 13:30:20 [INFO] [CamzifyService.src.core.service_runner] Using base URL: https://api.camzify.com
+2025-11-10 13:30:20 [INFO] [CamzifyService.src.api.api_handler] ApiHandler initialized for base_url=https://api.camzify.com
+2025-11-10 13:30:20 [INFO] [CamzifyService.src.api.camzify_api_handler] Initialized CamzifyApiHandler with ApiHandler
+2025-11-10 13:30:20 [INFO] [CamzifyService.src.api.camzify_api_handler] Fetching all features: ['line_intrusion_detector', 'zone_intrusion_detector']
+2025-11-10 13:30:21 [INFO] [CamzifyService.src.api.camzify_api_handler] Prepared 2 streams and 2 rule sets
+2025-11-10 13:30:21 [INFO] [CamzifyService.src.engine.rule_engine_manager] Subscribed to on_rules_updated, on_stream_updated, and on_stream_removed (if available)
+2025-11-10 13:30:21 [INFO] [CamzifyService.src.core.multi_stream_video_analytics_service] Subscribed to config store events
+2025-11-10 13:30:25 [ERROR] [CamzifyService.src.services.objectdetectors.object_detector] [SharedInference] Failed to load backend 'yolov11': [Errno 2] No such file or directory: 'objectdetectors\\yolov11\\models\\yolo11n_custom.pt'
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\services\objectdetectors\object_detector.py", line 70, in start
+    self.loader.load()
+  File "E:\PyCharmProjects\test_structure_camzify\src\services\objectdetectors\yolov11\yolo_detector.py", line 26, in load
+    self.model = YOLO(self.weights_path)
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\ultralytics\models\yolo\model.py", line 81, in __init__
+    super().__init__(model=model, task=task, verbose=verbose)
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\ultralytics\engine\model.py", line 149, in __init__
+    self._load(model, task=task)
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\ultralytics\engine\model.py", line 288, in _load
+    self.model, self.ckpt = load_checkpoint(weights)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\ultralytics\nn\tasks.py", line 1461, in load_checkpoint
+    ckpt, weight = torch_safe_load(weight)  # load ckpt
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\ultralytics\nn\tasks.py", line 1409, in torch_safe_load
+    ckpt = torch_load(file, map_location="cpu")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\ultralytics\utils\patches.py", line 116, in torch_load
+    return torch.load(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\torch\serialization.py", line 1484, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\torch\serialization.py", line 759, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\torch\serialization.py", line 740, in __init__
+    super().__init__(open(name, mode))
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'objectdetectors\\yolov11\\models\\yolo11n_custom.pt'
+2025-11-10 13:30:25 [INFO] [CamzifyService.src.streaming.multiprocess_capture_manager] [CAPMAN] All capture workers stopped.
+2025-11-10 13:30:25 [INFO] [CamzifyService.src.services.filtering.size_threshold_cache] Cleared all cached thresholds
+2025-11-10 13:30:25 [INFO] [CamzifyService.src.engine.rule_engine_manager] All engines stopped successfully
+2025-11-10 13:30:25 [INFO] [CamzifyService.src.core.multi_stream_video_analytics_service] Service stopped cleanly.
+2025-11-10 13:30:25 [INFO] [CamzifyService.src.core.service_runner] [MSVAS] Service stopped cleanly.
+2025-11-10 13:31:04 [INFO] [CamzifyService.src.core.service_runner] Launching service via asyncio runner...
+2025-11-10 13:31:04 [INFO] [CamzifyService.src.core.service_runner] Initializing MultiStreamVideoAnalyticsService...
+2025-11-10 13:31:04 [INFO] [CamzifyService.src.core.service_runner] Using base URL: https://api.camzify.com
+2025-11-10 13:31:04 [INFO] [CamzifyService.src.api.api_handler] ApiHandler initialized for base_url=https://api.camzify.com
+2025-11-10 13:31:04 [INFO] [CamzifyService.src.api.camzify_api_handler] Initialized CamzifyApiHandler with ApiHandler
+2025-11-10 13:31:04 [INFO] [CamzifyService.src.api.camzify_api_handler] Fetching all features: ['line_intrusion_detector', 'zone_intrusion_detector']
+2025-11-10 13:31:05 [INFO] [CamzifyService.src.api.camzify_api_handler] Prepared 2 streams and 2 rule sets
+2025-11-10 13:31:05 [INFO] [CamzifyService.src.engine.rule_engine_manager] Subscribed to on_rules_updated, on_stream_updated, and on_stream_removed (if available)
+2025-11-10 13:31:05 [INFO] [CamzifyService.src.core.multi_stream_video_analytics_service] Subscribed to config store events
+2025-11-10 13:31:09 [ERROR] [CamzifyService.src.services.objectdetectors.object_detector] [SharedInference] Failed to load backend 'yolov11': [Errno 2] No such file or directory: 'objectdetectors\\yolov11\\models\\yolo11n_custom.pt'
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\services\objectdetectors\object_detector.py", line 70, in start
+    self.loader.load()
+  File "E:\PyCharmProjects\test_structure_camzify\src\services\objectdetectors\yolov11\yolo_detector.py", line 26, in load
+    self.model = YOLO(self.weights_path)
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\ultralytics\models\yolo\model.py", line 81, in __init__
+    super().__init__(model=model, task=task, verbose=verbose)
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\ultralytics\engine\model.py", line 149, in __init__
+    self._load(model, task=task)
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\ultralytics\engine\model.py", line 288, in _load
+    self.model, self.ckpt = load_checkpoint(weights)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\ultralytics\nn\tasks.py", line 1461, in load_checkpoint
+    ckpt, weight = torch_safe_load(weight)  # load ckpt
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\ultralytics\nn\tasks.py", line 1409, in torch_safe_load
+    ckpt = torch_load(file, map_location="cpu")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\ultralytics\utils\patches.py", line 116, in torch_load
+    return torch.load(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\torch\serialization.py", line 1484, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\torch\serialization.py", line 759, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\torch\serialization.py", line 740, in __init__
+    super().__init__(open(name, mode))
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'objectdetectors\\yolov11\\models\\yolo11n_custom.pt'
+2025-11-10 13:31:09 [INFO] [CamzifyService.src.streaming.multiprocess_capture_manager] [CAPMAN] All capture workers stopped.
+2025-11-10 13:31:09 [INFO] [CamzifyService.src.services.filtering.size_threshold_cache] Cleared all cached thresholds
+2025-11-10 13:31:09 [INFO] [CamzifyService.src.engine.rule_engine_manager] All engines stopped successfully
+2025-11-10 13:31:09 [INFO] [CamzifyService.src.core.multi_stream_video_analytics_service] Service stopped cleanly.
+2025-11-10 13:31:09 [INFO] [CamzifyService.src.core.service_runner] [MSVAS] Service stopped cleanly.
+2025-11-10 13:32:18 [INFO] [CamzifyService.src.core.service_runner] Launching service via asyncio runner...
+2025-11-10 13:32:18 [INFO] [CamzifyService.src.core.service_runner] Initializing MultiStreamVideoAnalyticsService...
+2025-11-10 13:32:18 [INFO] [CamzifyService.src.core.service_runner] Using base URL: https://api.camzify.com
+2025-11-10 13:32:18 [INFO] [CamzifyService.src.api.api_handler] ApiHandler initialized for base_url=https://api.camzify.com
+2025-11-10 13:32:18 [INFO] [CamzifyService.src.api.camzify_api_handler] Initialized CamzifyApiHandler with ApiHandler
+2025-11-10 13:32:18 [INFO] [CamzifyService.src.api.camzify_api_handler] Fetching all features: ['line_intrusion_detector', 'zone_intrusion_detector']
+2025-11-10 13:32:19 [INFO] [CamzifyService.src.api.camzify_api_handler] Prepared 2 streams and 2 rule sets
+2025-11-10 13:32:19 [INFO] [CamzifyService.src.engine.rule_engine_manager] Subscribed to on_rules_updated, on_stream_updated, and on_stream_removed (if available)
+2025-11-10 13:32:19 [INFO] [CamzifyService.src.core.multi_stream_video_analytics_service] Subscribed to config store events
+2025-11-10 13:32:22 [ERROR] [CamzifyService.src.services.objectdetectors.object_detector] [SharedInference] Failed to load backend 'yolov11': [Errno 2] No such file or directory: 'src.services\\objectdetectors\\yolov11\\models\\yolo11n_custom.pt'
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\services\objectdetectors\object_detector.py", line 70, in start
+    self.loader.load()
+  File "E:\PyCharmProjects\test_structure_camzify\src\services\objectdetectors\yolov11\yolo_detector.py", line 26, in load
+    self.model = YOLO(self.weights_path)
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\ultralytics\models\yolo\model.py", line 81, in __init__
+    super().__init__(model=model, task=task, verbose=verbose)
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\ultralytics\engine\model.py", line 149, in __init__
+    self._load(model, task=task)
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\ultralytics\engine\model.py", line 288, in _load
+    self.model, self.ckpt = load_checkpoint(weights)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\ultralytics\nn\tasks.py", line 1461, in load_checkpoint
+    ckpt, weight = torch_safe_load(weight)  # load ckpt
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\ultralytics\nn\tasks.py", line 1409, in torch_safe_load
+    ckpt = torch_load(file, map_location="cpu")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\ultralytics\utils\patches.py", line 116, in torch_load
+    return torch.load(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\torch\serialization.py", line 1484, in load
+    with _open_file_like(f, "rb") as opened_file:
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\torch\serialization.py", line 759, in _open_file_like
+    return _open_file(name_or_buffer, mode)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\.venv\Lib\site-packages\torch\serialization.py", line 740, in __init__
+    super().__init__(open(name, mode))
+                     ^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'src.services\\objectdetectors\\yolov11\\models\\yolo11n_custom.pt'
+2025-11-10 13:32:22 [INFO] [CamzifyService.src.streaming.multiprocess_capture_manager] [CAPMAN] All capture workers stopped.
+2025-11-10 13:32:22 [INFO] [CamzifyService.src.services.filtering.size_threshold_cache] Cleared all cached thresholds
+2025-11-10 13:32:22 [INFO] [CamzifyService.src.engine.rule_engine_manager] All engines stopped successfully
+2025-11-10 13:32:22 [INFO] [CamzifyService.src.core.multi_stream_video_analytics_service] Service stopped cleanly.
+2025-11-10 13:32:22 [INFO] [CamzifyService.src.core.service_runner] [MSVAS] Service stopped cleanly.
+2025-11-10 13:32:41 [INFO] [CamzifyService.src.core.service_runner] Launching service via asyncio runner...
+2025-11-10 13:32:41 [INFO] [CamzifyService.src.core.service_runner] Initializing MultiStreamVideoAnalyticsService...
+2025-11-10 13:32:41 [INFO] [CamzifyService.src.core.service_runner] Using base URL: https://api.camzify.com
+2025-11-10 13:32:41 [INFO] [CamzifyService.src.api.api_handler] ApiHandler initialized for base_url=https://api.camzify.com
+2025-11-10 13:32:41 [INFO] [CamzifyService.src.api.camzify_api_handler] Initialized CamzifyApiHandler with ApiHandler
+2025-11-10 13:32:41 [INFO] [CamzifyService.src.api.camzify_api_handler] Fetching all features: ['line_intrusion_detector', 'zone_intrusion_detector']
+2025-11-10 13:32:42 [INFO] [CamzifyService.src.api.camzify_api_handler] Prepared 2 streams and 2 rule sets
+2025-11-10 13:32:42 [INFO] [CamzifyService.src.engine.rule_engine_manager] Subscribed to on_rules_updated, on_stream_updated, and on_stream_removed (if available)
+2025-11-10 13:32:42 [INFO] [CamzifyService.src.core.multi_stream_video_analytics_service] Subscribed to config store events
+2025-11-10 13:32:45 [INFO] [CamzifyService.src.services.objectdetectors.yolov11.yolo_detector] [Loader:YOLOv11] loaded src/services/objectdetectors/yolov11/models/yolo11n_custom.pt, imgsz=320
+2025-11-10 13:32:45 [INFO] [CamzifyService.src.services.objectdetectors.object_detector] [SharedInference] Loaded backend yolov11 via src.services.objectdetectors.yolov11.yolo_detector.YoloLoader
+2025-11-10 13:32:45 [INFO] [CamzifyService.src.streaming.multiprocess_capture_manager] [CAPMAN] Started process for 74 (640x360)
+2025-11-10 13:32:45 [INFO] [CamzifyService.src.streaming.multiprocess_capture_manager] [CAPMAN] Started process for 73 (640x360)
+2025-11-10 13:32:45 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] Started forwarder for stream 74
+2025-11-10 13:32:45 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] Started forwarder for stream 73
+2025-11-10 13:32:45 [INFO] [CamzifyService.src.core.multi_stream_video_analytics_service] Service started successfully.
+2025-11-10 13:32:45 [INFO] [CamzifyService.src.core.service_runner] [MSVAS] Service started successfully.
+2025-11-10 13:32:46 [INFO] [CamzifyService.src.streaming.capture_worker] 74: worker started (640x360)
+2025-11-10 13:32:46 [INFO] [CamzifyService.src.streaming.stream_capture] Stream released
+2025-11-10 13:32:46 [INFO] [CamzifyService.src.streaming.capture_worker] 73: worker started (640x360)
+2025-11-10 13:32:46 [INFO] [CamzifyService.src.streaming.stream_capture] Stream released
+2025-11-10 13:32:49 [INFO] [CamzifyService.src.streaming.stream_capture] Stream opened: https://media.camzify.live:8888/74/index.m3u8
+2025-11-10 13:32:49 [INFO] [CamzifyService.src.streaming.stream_capture] Stream opened: https://media.camzify.live:8888/73/index.m3u8
+2025-11-10 13:32:50 [DEBUG] [CamzifyService.src.streaming.capture_worker] 74: motion detected, switching to ACTIVE mode
+2025-11-10 13:32:50 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 74] Forwarded=1 | Dropped=0 | Thinned=0 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 13:32:50 [DEBUG] [CamzifyService.src.streaming.capture_worker] 73: motion detected, switching to ACTIVE mode
+2025-11-10 13:32:50 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 73] Forwarded=1 | Dropped=0 | Thinned=0 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 13:32:50 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 13:32:51 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 74] Forwarded=69 | Dropped=0 | Thinned=28 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 13:32:51 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 73] Forwarded=64 | Dropped=0 | Thinned=23 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 13:32:51 [DEBUG] [CamzifyService.src.services.filtering.size_threshold_cache] Recomputed thresholds for stream 73
+2025-11-10 13:32:51 [DEBUG] [CamzifyService.src.services.filtering.size_threshold_cache] Recomputed thresholds for stream 74
+2025-11-10 13:32:51 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 13:32:51 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 13:32:51 [INFO] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] creating StreamRuleEngine for 73
+2025-11-10 13:32:51 [INFO] [CamzifyService.src.engine.stream_rule_engine] [StreamRuleEngine:73] loading features from config; found: ['line_intrusion']
+2025-11-10 13:32:51 [DEBUG] [CamzifyService.src.engine.stream_rule_engine] [StreamRuleEngine:73] worker started, features=[('line_intrusion', 0)]
+2025-11-10 13:32:51 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 13:32:51 [INFO] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] creating StreamRuleEngine for 74
+2025-11-10 13:32:51 [INFO] [CamzifyService.src.engine.stream_rule_engine] [StreamRuleEngine:74] loading features from config; found: ['line_intrusion']
+2025-11-10 13:32:51 [DEBUG] [CamzifyService.src.engine.stream_rule_engine] [StreamRuleEngine:74] worker started, features=[('line_intrusion', 0)]
+2025-11-10 13:32:51 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 13:32:51 [DEBUG] [CamzifyService.src.streaming.capture_worker] 74: switching back to SENSOR mode
+2025-11-10 13:32:51 [DEBUG] [CamzifyService.src.streaming.capture_worker] 73: switching back to SENSOR mode
+2025-11-10 13:32:53 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 13:32:53 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 13:32:53 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 13:32:53 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 13:32:53 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 13:32:53 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 13:32:54 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 13:32:54 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 13:32:54 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 13:32:54 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 13:32:54 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 13:32:54 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 13:32:54 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 13:32:54 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 13:32:54 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 13:32:54 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 13:32:54 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 13:32:54 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 13:32:55 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 13:32:55 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 13:32:55 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 13:32:55 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 13:32:55 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 13:32:55 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 13:32:56 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 13:32:56 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 13:32:56 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 13:32:56 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 13:32:56 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 13:32:56 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 13:32:56 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 13:32:56 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 13:32:56 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 13:32:56 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 13:32:56 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 13:32:56 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 13:32:57 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 13:32:57 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 13:32:57 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 13:32:57 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 13:32:57 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 13:32:57 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'74': 6, '73': 6}
+2025-11-10 13:32:58 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 13:32:58 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 13:32:58 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 13:32:58 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 13:32:58 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 13:32:59 [DEBUG] [CamzifyService.src.streaming.capture_worker] 74: motion detected, switching to ACTIVE mode
+2025-11-10 13:32:59 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 74] Forwarded=14 | Dropped=0 | Thinned=13 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 13:32:59 [DEBUG] [CamzifyService.src.core.multi_stream_video_analytics_service] [BATCH] frames=12 breakdown={'73': 6, '74': 6}
+2025-11-10 13:33:00 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] dispatch called for sids=['73', '74']
+2025-11-10 13:33:00 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 73: 0 tracked objects passed to dispatcher.
+2025-11-10 13:33:00 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 73
+2025-11-10 13:33:00 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] Stream 74: 0 tracked objects passed to dispatcher.
+2025-11-10 13:33:00 [DEBUG] [CamzifyService.src.engine.rule_engine_manager] [RuleEngineManager] found existing engine for 74
+2025-11-10 13:33:00 [INFO] [CamzifyService.src.streaming.stream_capture] Stream released
+2025-11-10 13:33:00 [INFO] [CamzifyService.src.streaming.capture_worker] 74: worker stopped.
+2025-11-10 13:33:00 [INFO] [CamzifyService.src.streaming.stream_capture] Stream released
+2025-11-10 13:33:00 [INFO] [CamzifyService.src.streaming.capture_worker] 73: worker stopped.
+2025-11-10 13:33:00 [ERROR] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 73] frame processing error: cannot unpack non-iterable NoneType object
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\pipelines\forwarder_worker.py", line 66, in run
+    jpeg_bytes, ts, sid, frame_num = payload
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: cannot unpack non-iterable NoneType object
+2025-11-10 13:33:00 [INFO] [CamzifyService.src.pipelines.forwarder_worker] [STREAM 73] Forwarded=17 | Dropped=1 | Thinned=18 | Filtered(Inactive)=0 | Filtered(Time)=0
+2025-11-10 13:33:02 [INFO] [CamzifyService.src.streaming.multiprocess_capture_manager] [CAPMAN] All capture workers stopped.
+2025-11-10 13:33:02 [INFO] [CamzifyService.src.services.filtering.size_threshold_cache] Cleared all cached thresholds
+2025-11-10 13:33:03 [INFO] [CamzifyService.src.engine.features.line_intrusion_detector.LineIntrusionDetector] [ILD:73] LineIntrusionDetector shutdown
+2025-11-10 18:02:08 [INFO] [CamzifyService.src.core.service_runner] Launching service
+2025-11-10 18:04:09 [INFO] [CamzifyService.src.core.service_runner] Launching service
+2025-11-10 18:08:05 [INFO] [CamzifyService.src.core.service_runner] Launching service
+2025-11-10 18:08:12 [INFO] [CamzifyService.src.core.service_runner] Initializing MultiStreamVideoAnalyticsService
+2025-11-10 18:08:12 [INFO] [CamzifyService.src.core.service_runner] Using base URL: https://api.camzify.com
+2025-11-10 18:08:12 [INFO] [CamzifyService.src.core.service_runner] Authenticating as: admin
+2025-11-10 18:08:12 [INFO] [CamzifyService.src.api.camzify.client] CamzifyClient initialized with auto token refresh
+2025-11-10 18:08:12 [INFO] [CamzifyService.src.api.core.auth_client] Token expired or missing, requesting new token
+2025-11-10 18:08:12 [INFO] [CamzifyService.src.api.core.auth_client] Requesting access token for user: admin
+2025-11-10 18:08:13 [ERROR] [CamzifyService.src.api.core.auth_client] Token request failed: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 75, in _request_token
+    raise ValueError(f"Authentication failed [{response.status}]: {text}")
+ValueError: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+2025-11-10 18:08:13 [ERROR] [CamzifyService.src.core.service_runner] Failed to fetch streams and rules: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\core\service_runner.py", line 67, in run
+    streams, rules = await self.setup_streams_and_rules(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\src\core\service_runner.py", line 39, in setup_streams_and_rules
+    async with CamzifyClient(
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\camzify\client.py", line 60, in __aenter__
+    await self._auth_client.__aenter__()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 33, in __aenter__
+    await self._ensure_valid_token()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 52, in _ensure_valid_token
+    await self._request_token()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 75, in _request_token
+    raise ValueError(f"Authentication failed [{response.status}]: {text}")
+ValueError: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+2025-11-10 18:10:53 [INFO] [CamzifyService.src.core.service_runner] Launching service
+2025-11-10 18:11:03 [INFO] [CamzifyService.src.core.service_runner] Initializing MultiStreamVideoAnalyticsService
+2025-11-10 18:11:03 [INFO] [CamzifyService.src.core.service_runner] Using base URL: https://api.camzify.com
+2025-11-10 18:11:03 [INFO] [CamzifyService.src.core.service_runner] Authenticating as: admin
+2025-11-10 18:11:03 [INFO] [CamzifyService.src.api.camzify.client] CamzifyClient initialized with auto token refresh
+2025-11-10 18:11:03 [INFO] [CamzifyService.src.api.core.auth_client] Token expired or missing, requesting new token
+2025-11-10 18:11:03 [INFO] [CamzifyService.src.api.core.auth_client] Requesting access token for user: admin
+2025-11-10 18:11:04 [ERROR] [CamzifyService.src.api.core.auth_client] Token request failed: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 75, in _request_token
+    raise ValueError(f"Authentication failed [{response.status}]: {text}")
+ValueError: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+2025-11-10 18:11:04 [ERROR] [CamzifyService.src.core.service_runner] Failed to fetch streams and rules: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\core\service_runner.py", line 67, in run
+    streams, rules = await self.setup_streams_and_rules(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\src\core\service_runner.py", line 39, in setup_streams_and_rules
+    async with CamzifyClient(
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\camzify\client.py", line 60, in __aenter__
+    await self._auth_client.__aenter__()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 33, in __aenter__
+    await self._ensure_valid_token()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 52, in _ensure_valid_token
+    await self._request_token()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 75, in _request_token
+    raise ValueError(f"Authentication failed [{response.status}]: {text}")
+ValueError: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+2025-11-10 23:33:34 [INFO] [CamzifyService.src.core.service_runner] Launching service
+2025-11-10 23:34:00 [INFO] [CamzifyService.src.core.service_runner] Initializing MultiStreamVideoAnalyticsService
+2025-11-10 23:34:00 [INFO] [CamzifyService.src.core.service_runner] Using base URL: https://api.camzify.com
+2025-11-10 23:34:00 [INFO] [CamzifyService.src.core.service_runner] Authenticating as: admin
+2025-11-10 23:34:00 [INFO] [CamzifyService.src.api.camzify.client] CamzifyClient initialized with auto token refresh
+2025-11-10 23:34:00 [INFO] [CamzifyService.src.api.core.auth_client] Token expired or missing, requesting new token
+2025-11-10 23:34:00 [INFO] [CamzifyService.src.api.core.auth_client] Requesting access token for user: admin
+2025-11-10 23:34:01 [ERROR] [CamzifyService.src.api.core.auth_client] Token request failed: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 75, in _request_token
+    raise ValueError(f"Authentication failed [{response.status}]: {text}")
+ValueError: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+2025-11-10 23:34:01 [ERROR] [CamzifyService.src.core.service_runner] Failed to fetch streams and rules: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\core\service_runner.py", line 67, in run
+    streams, rules = await self.setup_streams_and_rules(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\src\core\service_runner.py", line 39, in setup_streams_and_rules
+    async with CamzifyClient(
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\camzify\client.py", line 60, in __aenter__
+    await self._auth_client.__aenter__()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 33, in __aenter__
+    await self._ensure_valid_token()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 52, in _ensure_valid_token
+    await self._request_token()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 75, in _request_token
+    raise ValueError(f"Authentication failed [{response.status}]: {text}")
+ValueError: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+2025-11-10 23:40:34 [INFO] [CamzifyService.src.core.service_runner] Launching service
+2025-11-10 23:40:38 [INFO] [CamzifyService.src.core.service_runner] Initializing MultiStreamVideoAnalyticsService
+2025-11-10 23:40:38 [INFO] [CamzifyService.src.core.service_runner] Using base URL: https://api.camzify.com
+2025-11-10 23:40:38 [INFO] [CamzifyService.src.core.service_runner] Authenticating as: admin
+2025-11-10 23:40:38 [INFO] [CamzifyService.src.api.camzify.client] CamzifyClient initialized with auto token refresh
+2025-11-10 23:40:38 [INFO] [CamzifyService.src.api.core.auth_client] Token expired or missing, requesting new token
+2025-11-10 23:40:38 [INFO] [CamzifyService.src.api.core.auth_client] Requesting access token for user: admin
+2025-11-10 23:40:39 [ERROR] [CamzifyService.src.api.core.auth_client] Token request failed: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 75, in _request_token
+    raise ValueError(f"Authentication failed [{response.status}]: {text}")
+ValueError: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+2025-11-10 23:40:39 [ERROR] [CamzifyService.src.core.service_runner] Failed to fetch streams and rules: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\core\service_runner.py", line 67, in run
+    streams, rules = await self.setup_streams_and_rules(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\src\core\service_runner.py", line 39, in setup_streams_and_rules
+    async with CamzifyClient(
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\camzify\client.py", line 60, in __aenter__
+    await self._auth_client.__aenter__()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 33, in __aenter__
+    await self._ensure_valid_token()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 52, in _ensure_valid_token
+    await self._request_token()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 75, in _request_token
+    raise ValueError(f"Authentication failed [{response.status}]: {text}")
+ValueError: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+2025-11-10 23:43:15 [INFO] [CamzifyService.src.core.service_runner] Launching service
+2025-11-10 23:43:18 [INFO] [CamzifyService.src.core.service_runner] Initializing MultiStreamVideoAnalyticsService
+2025-11-10 23:43:18 [INFO] [CamzifyService.src.core.service_runner] Using base URL: https://api.camzify.com
+2025-11-10 23:43:18 [INFO] [CamzifyService.src.core.service_runner] Authenticating as: admin
+2025-11-10 23:43:18 [INFO] [CamzifyService.src.api.camzify.client] CamzifyClient initialized with auto token refresh
+2025-11-10 23:43:18 [INFO] [CamzifyService.src.api.core.auth_client] Token expired or missing, requesting new token
+2025-11-10 23:43:18 [INFO] [CamzifyService.src.api.core.auth_client] Requesting access token for user: admin
+2025-11-10 23:43:19 [ERROR] [CamzifyService.src.api.core.auth_client] Token request failed: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 76, in _request_token
+    raise ValueError(f"Authentication failed [{response.status}]: {text}")
+ValueError: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+2025-11-10 23:43:19 [ERROR] [CamzifyService.src.core.service_runner] Failed to fetch streams and rules: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\core\service_runner.py", line 67, in run
+    streams, rules = await self.setup_streams_and_rules(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\src\core\service_runner.py", line 39, in setup_streams_and_rules
+    async with CamzifyClient(
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\camzify\client.py", line 60, in __aenter__
+    await self._auth_client.__aenter__()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 33, in __aenter__
+    await self._ensure_valid_token()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 52, in _ensure_valid_token
+    await self._request_token()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 76, in _request_token
+    raise ValueError(f"Authentication failed [{response.status}]: {text}")
+ValueError: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+2025-11-10 23:43:46 [INFO] [CamzifyService.src.core.service_runner] Launching service
+2025-11-10 23:43:53 [INFO] [CamzifyService.src.core.service_runner] Initializing MultiStreamVideoAnalyticsService
+2025-11-10 23:43:53 [INFO] [CamzifyService.src.core.service_runner] Using base URL: https://api.camzify.com
+2025-11-10 23:43:53 [INFO] [CamzifyService.src.core.service_runner] Authenticating as: admin
+2025-11-10 23:43:53 [INFO] [CamzifyService.src.api.camzify.client] CamzifyClient initialized with auto token refresh
+2025-11-10 23:43:53 [INFO] [CamzifyService.src.api.core.auth_client] Token expired or missing, requesting new token
+2025-11-10 23:43:53 [INFO] [CamzifyService.src.api.core.auth_client] Requesting access token for user: admin
+2025-11-10 23:43:54 [ERROR] [CamzifyService.src.api.core.auth_client] Token request failed: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 76, in _request_token
+    raise ValueError(f"Authentication failed [{response.status}]: {text}")
+ValueError: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+2025-11-10 23:43:54 [ERROR] [CamzifyService.src.core.service_runner] Failed to fetch streams and rules: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\core\service_runner.py", line 67, in run
+    streams, rules = await self.setup_streams_and_rules(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\src\core\service_runner.py", line 39, in setup_streams_and_rules
+    async with CamzifyClient(
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\camzify\client.py", line 60, in __aenter__
+    await self._auth_client.__aenter__()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 33, in __aenter__
+    await self._ensure_valid_token()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 52, in _ensure_valid_token
+    await self._request_token()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 76, in _request_token
+    raise ValueError(f"Authentication failed [{response.status}]: {text}")
+ValueError: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+2025-11-10 23:45:20 [INFO] [CamzifyService.src.core.service_runner] Launching service
+2025-11-10 23:45:31 [INFO] [CamzifyService.src.core.service_runner] Initializing MultiStreamVideoAnalyticsService
+2025-11-10 23:45:31 [INFO] [CamzifyService.src.core.service_runner] Using base URL: https://api.camzify.com
+2025-11-10 23:45:31 [INFO] [CamzifyService.src.core.service_runner] Authenticating as: admin
+2025-11-10 23:45:31 [INFO] [CamzifyService.src.api.camzify.client] CamzifyClient initialized with auto token refresh
+2025-11-10 23:45:31 [INFO] [CamzifyService.src.api.core.auth_client] Token expired or missing, requesting new token
+2025-11-10 23:45:31 [INFO] [CamzifyService.src.api.core.auth_client] Requesting access token for user: admin
+2025-11-10 23:45:33 [ERROR] [CamzifyService.src.api.core.auth_client] Token request failed: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 80, in _request_token
+    raise ValueError(f"Authentication failed [{response.status}]: {text}")
+ValueError: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+2025-11-10 23:45:33 [ERROR] [CamzifyService.src.core.service_runner] Failed to fetch streams and rules: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\core\service_runner.py", line 67, in run
+    streams, rules = await self.setup_streams_and_rules(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\src\core\service_runner.py", line 39, in setup_streams_and_rules
+    async with CamzifyClient(
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\camzify\client.py", line 60, in __aenter__
+    await self._auth_client.__aenter__()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 33, in __aenter__
+    await self._ensure_valid_token()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 53, in _ensure_valid_token
+    await self._request_token()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 80, in _request_token
+    raise ValueError(f"Authentication failed [{response.status}]: {text}")
+ValueError: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+2025-11-10 23:46:25 [INFO] [CamzifyService.src.core.service_runner] Launching service
+2025-11-10 23:46:31 [INFO] [CamzifyService.src.core.service_runner] Initializing MultiStreamVideoAnalyticsService
+2025-11-10 23:46:31 [INFO] [CamzifyService.src.core.service_runner] Using base URL: https://api.camzify.com
+2025-11-10 23:46:31 [INFO] [CamzifyService.src.core.service_runner] Authenticating as: admin
+2025-11-10 23:46:31 [INFO] [CamzifyService.src.api.camzify.client] CamzifyClient initialized with auto token refresh
+2025-11-10 23:46:31 [INFO] [CamzifyService.src.api.core.auth_client] Token expired or missing, requesting new token
+2025-11-10 23:46:31 [INFO] [CamzifyService.src.api.core.auth_client] Requesting access token for user: admin
+2025-11-10 23:46:33 [ERROR] [CamzifyService.src.api.core.auth_client] Token request failed: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 81, in _request_token
+    raise ValueError(f"Authentication failed [{response.status}]: {text}")
+ValueError: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+2025-11-10 23:46:33 [ERROR] [CamzifyService.src.core.service_runner] Failed to fetch streams and rules: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\core\service_runner.py", line 67, in run
+    streams, rules = await self.setup_streams_and_rules(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\src\core\service_runner.py", line 39, in setup_streams_and_rules
+    async with CamzifyClient(
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\camzify\client.py", line 60, in __aenter__
+    await self._auth_client.__aenter__()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 33, in __aenter__
+    await self._ensure_valid_token()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 53, in _ensure_valid_token
+    await self._request_token()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 81, in _request_token
+    raise ValueError(f"Authentication failed [{response.status}]: {text}")
+ValueError: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+2025-11-10 23:52:34 [INFO] [CamzifyService.src.core.service_runner] Launching service
+2025-11-10 23:52:47 [INFO] [CamzifyService.src.core.service_runner] Initializing MultiStreamVideoAnalyticsService
+2025-11-10 23:52:47 [INFO] [CamzifyService.src.core.service_runner] Using base URL: https://api.camzify.com
+2025-11-10 23:52:47 [INFO] [CamzifyService.src.core.service_runner] Authenticating as: admin
+2025-11-10 23:52:47 [INFO] [CamzifyService.src.api.camzify.client] CamzifyClient initialized with auto token refresh
+2025-11-10 23:52:47 [INFO] [CamzifyService.src.api.core.auth_client] Token expired or missing, requesting new token
+2025-11-10 23:52:47 [INFO] [CamzifyService.src.api.core.auth_client] Requesting access token for user: admin
+2025-11-10 23:52:48 [ERROR] [CamzifyService.src.api.core.auth_client] Token request failed: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 80, in _request_token
+    raise ValueError(f"Authentication failed [{response.status}]: {text}")
+ValueError: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+2025-11-10 23:52:48 [ERROR] [CamzifyService.src.core.service_runner] Failed to fetch streams and rules: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\core\service_runner.py", line 67, in run
+    streams, rules = await self.setup_streams_and_rules(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\src\core\service_runner.py", line 39, in setup_streams_and_rules
+    async with CamzifyClient(
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\camzify\client.py", line 60, in __aenter__
+    await self._auth_client.__aenter__()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 33, in __aenter__
+    await self._ensure_valid_token()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 53, in _ensure_valid_token
+    await self._request_token()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 80, in _request_token
+    raise ValueError(f"Authentication failed [{response.status}]: {text}")
+ValueError: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+2025-11-10 23:53:41 [INFO] [CamzifyService.src.core.service_runner] Launching service
+2025-11-10 23:53:57 [INFO] [CamzifyService.src.core.service_runner] Initializing MultiStreamVideoAnalyticsService
+2025-11-10 23:53:57 [INFO] [CamzifyService.src.core.service_runner] Using base URL: https://api.camzify.com
+2025-11-10 23:53:57 [INFO] [CamzifyService.src.core.service_runner] Authenticating as: admin
+2025-11-10 23:53:57 [INFO] [CamzifyService.src.api.camzify.client] CamzifyClient initialized with auto token refresh
+2025-11-10 23:53:57 [INFO] [CamzifyService.src.api.core.auth_client] Token expired or missing, requesting new token
+2025-11-10 23:53:57 [INFO] [CamzifyService.src.api.core.auth_client] Requesting access token for user: admin
+2025-11-10 23:53:57 [ERROR] [CamzifyService.src.api.core.auth_client] Token request failed: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 80, in _request_token
+    raise ValueError(f"Authentication failed [{response.status}]: {text}")
+ValueError: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+2025-11-10 23:53:57 [ERROR] [CamzifyService.src.core.service_runner] Failed to fetch streams and rules: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\core\service_runner.py", line 67, in run
+    streams, rules = await self.setup_streams_and_rules(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\src\core\service_runner.py", line 39, in setup_streams_and_rules
+    async with CamzifyClient(
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\camzify\client.py", line 60, in __aenter__
+    await self._auth_client.__aenter__()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 33, in __aenter__
+    await self._ensure_valid_token()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 53, in _ensure_valid_token
+    await self._request_token()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 80, in _request_token
+    raise ValueError(f"Authentication failed [{response.status}]: {text}")
+ValueError: Authentication failed [405]: {"message":"The method 'GET' is not allowed on the path '/api/v1/auth/login/'"}
+2025-11-10 23:58:45 [INFO] [CamzifyService.src.core.service_runner] Launching service
+2025-11-10 23:58:50 [INFO] [CamzifyService.src.core.service_runner] Initializing MultiStreamVideoAnalyticsService
+2025-11-10 23:58:50 [INFO] [CamzifyService.src.core.service_runner] Using base URL: https://api.camzify.com
+2025-11-10 23:58:50 [INFO] [CamzifyService.src.core.service_runner] Authenticating as: admin
+2025-11-10 23:58:50 [INFO] [CamzifyService.src.api.camzify.client] CamzifyClient initialized with auto token refresh
+2025-11-10 23:58:50 [INFO] [CamzifyService.src.api.core.auth_client] Token expired or missing, requesting new token
+2025-11-10 23:58:50 [INFO] [CamzifyService.src.api.core.auth_client] Requesting access token for user: admin
+2025-11-10 23:58:50 [DEBUG] [CamzifyService.src.api.core.auth_client] POST https://api.camzify.com/api/v1/auth/login/
+2025-11-10 23:58:51 [ERROR] [CamzifyService.src.api.core.auth_client] Token request failed: Authentication failed [400]: {"errors":["'login' is required"]}
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 90, in _request_token
+    raise ValueError(f"Authentication failed [{response.status}]: {text}")
+ValueError: Authentication failed [400]: {"errors":["'login' is required"]}
+2025-11-10 23:58:51 [ERROR] [CamzifyService.src.core.service_runner] Failed to fetch streams and rules: Authentication failed [400]: {"errors":["'login' is required"]}
+Traceback (most recent call last):
+  File "E:\PyCharmProjects\test_structure_camzify\src\core\service_runner.py", line 67, in run
+    streams, rules = await self.setup_streams_and_rules(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\PyCharmProjects\test_structure_camzify\src\core\service_runner.py", line 39, in setup_streams_and_rules
+    async with CamzifyClient(
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\camzify\client.py", line 60, in __aenter__
+    await self._auth_client.__aenter__()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 37, in __aenter__
+    await self._ensure_valid_token()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 57, in _ensure_valid_token
+    await self._request_token()
+  File "E:\PyCharmProjects\test_structure_camzify\src\api\core\auth_client.py", line 90, in _request_token
+    raise ValueError(f"Authentication failed [{response.status}]: {text}")
+ValueError: Authentication failed [400]: {"errors":["'login' is required"]}
