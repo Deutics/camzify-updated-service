@@ -1,5 +1,6 @@
 # main.py
-from core.service_runner import start_service
+from src.core.service_runner import ServiceRunner
 
 if __name__ == "__main__":
-    start_service()
+    service = ServiceRunner()
+    service.start_service()
