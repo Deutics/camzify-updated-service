@@ -1,7 +1,6 @@
 # utils/stream_utils.py
 from src.utils.utils import start_daemon_thread, safe_close_queue
 from src.utils.live_visualization import LiveVisualization
-from src.services.filtering.size_threshold_cache import SizeThresholdCache
 from src.notifications.alert_system import AlertSystem
 from src.pipelines.forwarder_worker import ForwarderWorker
 
@@ -42,23 +41,3 @@ def start_forwarder_thread(
     t = start_daemon_thread(fw.run, name=f"forwarder-{sid}", threads_list=threads_list)
     logger.debug(f"Started forwarder for stream {sid}")
     return t
-
-
-def stop_stream_resources(capture_manager, viz, threshold_cache, frame_queue, logger):
-    """Safely stop all components related to a stream."""
-    try:
-        safe_close_queue(frame_queue)
-    except Exception:
-        logger.debug(f"Queue close failed for stream", exc_info=True)
-    try:
-        capture_manager.stop()
-    except Exception:
-        logger.debug("capture_manager.stop failed", exc_info=True)
-    try:
-        threshold_cache.detach()
-    except Exception:
-        logger.debug("threshold_cache.detach failed", exc_info=True)
-    try:
-        viz.stop()
-    except Exception:
-        logger.debug("viz.stop failed", exc_info=True)

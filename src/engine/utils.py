@@ -24,7 +24,7 @@ def safe_call(func, *args, default=None, **kwargs):
     try:
         return func(*args, **kwargs)
     except Exception as e:
-        from utils.logger import get_logger
+        from src.utils.logger import get_logger
         logger = get_logger("rule_engine_utils")
         logger.exception(f"safe_call failed: {e}")
         return default

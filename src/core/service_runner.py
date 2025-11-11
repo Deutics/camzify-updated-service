@@ -83,6 +83,11 @@ class ServiceRunner:
 
             print("\nNo active streams found. Exiting.")
             return
+        # import pprint
+        # pprint.pprint(streams)
+        # print("="*50)
+        # pprint.pprint(rules)
+        # exit()
 
         self.svc = MultiStreamVideoAnalyticsService(
             streams,

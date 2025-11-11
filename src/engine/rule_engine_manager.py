@@ -2,11 +2,8 @@
 
 import threading
 from typing import Dict, Any, Optional, List
-
-from src.engine.config_store_adapter import ConfigStoreAdapter
 from src.engine.stream_rule_engine import StreamRuleEngine
 from src.utils.logger import get_logger
-from src.engine.utils import bind_store_callback_safely
 logger = get_logger(__name__)
 
 class RuleEngineManager:
@@ -27,8 +24,7 @@ class RuleEngineManager:
 
     ):
 
-        self.config_store = ConfigStoreAdapter(raw_config_store)
-        self._raw_store = raw_config_store
+        self.config_store = raw_config_store
 
         self.alert_systems = alert_systems or {}
         self.visualizers = visualizers or {}
@@ -41,36 +37,7 @@ class RuleEngineManager:
         self._lock = threading.Lock()
         self._stream_engines: Dict[str, StreamRuleEngine] = {}
 
-        self._bind_store_events_if_available()
-        logger.info("Subscribed to on_rules_updated, on_stream_updated, and on_stream_removed (if available)")
 
-    # ----------------------------------------------------------------------
-    def _bind_store_events_if_available(self) -> None:
-        """Bind fine-grained config store events with safe callbacks."""
-        store = self._raw_store
-
-        # Rule set updates
-        if hasattr(store, "on_rules_updated") and callable(store.on_rules_updated):
-            def rules_cb(stream_id, old_rules, new_rules, diff):
-                self._on_rules_updated(stream_id)
-                logger.debug(f"on_rules_updated -> refresh_rules({stream_id})")
-            bind_store_callback_safely(store, "on_rules_updated", rules_cb)
-
-        # Stream removal
-        if hasattr(store, "on_stream_removed") and callable(store.on_stream_removed):
-            def removed_cb(stream_id):
-                self._on_stream_removed(stream_id)
-                logger.debug(f"on_stream_removed -> stop({stream_id})")
-            bind_store_callback_safely(store, "on_stream_removed", removed_cb)
-
-        # Stream updates
-        if hasattr(store, "on_stream_updated") and callable(store.on_stream_updated):
-            def updated_cb(stream_id, old_cfg, new_cfg, diff):
-                changed = set(diff.get("changed_keys", []))
-                if {"camera_width", "camera_height"} & changed:
-                    self._on_rules_updated(stream_id)
-                    logger.debug(f"on_stream_updated -> refresh_rules({stream_id}) due to camera dims")
-            bind_store_callback_safely(store, "on_stream_updated", updated_cb)
 
     # ----------------------------------------------------------------------
     def _ensure_stream_engine(self, stream_id: str) -> StreamRuleEngine:
@@ -95,26 +62,6 @@ class RuleEngineManager:
             )
             self._stream_engines[sid] = eng
             return eng
-
-    def _on_rules_updated(self, stream_id: str) -> None:
-        sid = str(stream_id)
-        with self._lock:
-            eng = self._stream_engines.get(sid)
-        if eng:
-            try:
-                eng.refresh_rules()
-            except Exception:
-                logger.exception(f"Failed to refresh rules for {sid}")
-
-    def _on_stream_removed(self, stream_id: str) -> None:
-        sid = str(stream_id)
-        with self._lock:
-            eng = self._stream_engines.pop(sid, None)
-        if eng:
-            try:
-                eng.stop()
-            except Exception:
-                logger.exception(f"Failed to stop engine for {sid}")
 
     # ----------------------------------------------------------------------
     def dispatch(

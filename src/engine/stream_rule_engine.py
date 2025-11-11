@@ -11,7 +11,7 @@ from src.engine.factories import get_feature_factory
 from src.data_models.frame_data import FrameData
 from src.data_models.detection_results import DetectionResult
 from src.data_models.tracked_object import TrackedObject
-from src.engine.config_store_adapter import ConfigStoreAdapter
+from src.core.rule_config_store import RuleConfigStore
 from src.utils.logger import get_logger
 from src.engine.utils import safe_call, extract_overlay_geometry
 logger = get_logger(__name__)
@@ -29,7 +29,7 @@ class StreamRuleEngine:
     def __init__(
         self,
         stream_id: str,
-        config_store: ConfigStoreAdapter,
+        config_store: RuleConfigStore,
         feature_registry: Dict[str, Any],
         alert_system: Any = None,
         visualizer: Any = None,
@@ -74,9 +74,6 @@ class StreamRuleEngine:
                 logger.warning(f"Queue full, failed to enqueue: {e}")
                 return False
 
-    def refresh_rules(self) -> None:
-        """Force a refresh of rules from the config store."""
-        safe_call(self._on_config_update)
 
     def stop(self) -> None:
         self.stop_event.set()
@@ -113,47 +110,6 @@ class StreamRuleEngine:
             for k in set(self.feature_instances.keys()) - set(new_instances.keys()):
                 safe_call(lambda inst=self.feature_instances[k]: inst.shutdown())
             self.feature_instances = new_instances
-
-    def _on_config_update(self) -> None:
-        logger.info("Applying rules update")
-        current_cfgs = safe_call(lambda: self.config_store.get_active_features(self.stream_id) or {}, default={})
-
-        with self._features_lock:
-            new_instances: Dict[Tuple[str, int], FeatureBase] = {}
-
-            for feature_name, cfg_list in current_cfgs.items():
-                factory = self.feature_registry.get(feature_name) or get_feature_factory(feature_name)
-                if not factory:
-                    continue
-
-                for idx, cfg in enumerate(cfg_list):
-                    key = (feature_name, idx)
-                    existing = self.feature_instances.get(key)
-
-                    if existing and hasattr(existing, "update_config"):
-                        if safe_call(lambda: existing.update_config(cfg)):
-                            new_instances[key] = existing
-                            continue
-
-                    # Recreate if needed
-                    if existing:
-                        safe_call(existing.shutdown)
-                    inst = safe_call(lambda: factory(cfg, self.stream_id, self.alert_system, self.visualizer))
-                    if inst:
-                        new_instances[key] = inst
-
-            # Shutdown removed instances
-            for old_key, old_inst in self.feature_instances.items():
-                if old_key not in new_instances:
-                    safe_call(old_inst.shutdown)
-
-            self.feature_instances = new_instances
-
-            # Update visualizer overlay
-            overlay = extract_overlay_geometry(list(self.feature_instances.values()))
-            if self.visualizer and hasattr(self.visualizer, "set_overlay_geometry"):
-                safe_call(lambda: self.visualizer.set_overlay_geometry(self.stream_id, overlay))
-                logger.debug(f"Overlay updated: {overlay}")
 
     # -----------------------------
     # Internal: worker loop

@@ -1,7 +1,7 @@
 # rule_engine/factories.py
 
 from typing import Dict, Optional, Callable,Any
-from src.engine.features.line_intrusion_detector.LineIntrusionDetector import ImprovedLineIntrusionDetector
+from src.engine.features.line_intrusion_detector.line_intrusion_detector import LineIntrusionDetector
 
 FEATURE_REGISTRY = {}
 
@@ -12,7 +12,7 @@ def get_feature_factory(name: str) -> Optional[Callable[[Dict[str, Any], str, An
     return FEATURE_REGISTRY.get(name)
 
 # Register refactored feature directly (NO adapter)
-register_feature("line_intrusion", lambda cfg, sid, alert_sys, viz: ImprovedLineIntrusionDetector(cfg, sid, alert_sys, viz))
+register_feature("line_intrusion", lambda cfg, sid, alert_sys, viz: LineIntrusionDetector(cfg, sid, alert_sys, viz))
 
 # from WeaponDetectionFeature import WeaponDetectionFeature
 #

@@ -1,4 +1,4 @@
-# capture/MultiprocessCaptureManager.py
+# src/streaming/MultiprocessCaptureManager.py
 from typing import Dict, List, Any, Optional, Union
 import multiprocessing as mp
 import threading
