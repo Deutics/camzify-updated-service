@@ -4,9 +4,9 @@ class Config:
 
     MODEL_REGISTRY = {
     "yolov11": {
-        "module": "objectdetectors.yolov11.yolo_detector",
+        "module": "src.services.objectdetectors.yolov11.yolo_detector",
         "class": "YoloLoader",
-        "default_weights": "objectdetectors/yolov11/models/yolo11n_custom.pt"
+        "default_weights": "src.services/objectdetectors/yolov11/models/yolo11n_custom.pt"
     },
     "mobilenetv3": {
         "module": "detectors.mobilenetv3.mobilenetv3_loader",
