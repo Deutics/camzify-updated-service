@@ -35,8 +35,7 @@ logs/
 
 # --- Data / Media ---
 videos/
-snapshots_73/
-snapshots_74/
+snapshots_*
 *.jpg
 *.jpeg
 *.png

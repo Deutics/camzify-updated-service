@@ -5,7 +5,7 @@ import threading
 from pathlib import Path
 
 from src.streaming.capture_worker import capture_worker
-from src.utils.service_cleanup import safe_join_process, safe_join_thread
+from src.utils.service_helpers import safe_join_process, safe_join_thread
 from src.utils.logger import get_logger
 logger = get_logger(__name__)
 

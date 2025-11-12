@@ -1,13 +1,13 @@
-from src.api.camzify.client import CamzifyClient
-from src.api.core.http_client import HttpClient
-from src.api.core.auth_client import AuthClient
+from src.api.camzify.camzify_client import CamzifyClient
+from src.api.core.api_client import APIClient
+from src.api.core.auth_model import AuthModel
 from src.api.parsers.coordinate_mapper import CoordinateMapper
 
 
 
 __all__ = [
     "CamzifyClient",
-    "HttpClient",
-    "AuthClient",
+    "APIClient",
+    "AuthModel",
     "CoordinateMapper"
 ]
