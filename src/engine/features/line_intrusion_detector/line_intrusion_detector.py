@@ -66,9 +66,6 @@ class LineIntrusionDetector(FeatureBase):
 
             obj_center = obj.center()
 
-            if not is_point_inside_bbox(obj_center, self.bbox_start, self.bbox_end):
-                continue
-
             if self.min_obj_width is not None:
                 obj_width = obj.bbox[2] - obj.bbox[0]
                 obj_height = obj.bbox[3] - obj.bbox[1]
