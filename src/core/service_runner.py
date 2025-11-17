@@ -39,18 +39,17 @@ class ServiceRunner:
                     "zone_intrusion_detector",
                 ]
 
-                streams, rules = await camzify.fetch_all_features(feature_types, is_active=True)
+                streams_config = await camzify.fetch_all_features(feature_types, is_active=True)
 
-                if not streams:
+                if not streams_config:
                     print("\n⚠️ No active streams found. Exiting.")
                     logger.warning("No active streams found. Exiting.")
                     return
 
-                logger.info(f"Loaded {len(streams)} streams and {len(rules)} rule sets.")
+                logger.info(f"Loaded {len(streams_config)} streams with normalized rule configs.")
 
                 svc = MultiStreamVideoAnalyticsService(
-                    streams_config=streams,
-                    rules_config=rules,
+                    streams_config=streams_config,
                     model_dir="yolov11",
                     queue_size=50,
                     target_fps=20.0,

@@ -85,6 +85,7 @@ class RuleEngineManager:
             except Exception as e:
                 logger.exception(f"[RuleEngineManager] Dispatch error for stream {sid}: {e}")
                 results[sid] = False
+
         return results
 
     def stop(self) -> None:

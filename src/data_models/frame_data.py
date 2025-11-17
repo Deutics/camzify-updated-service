@@ -9,4 +9,4 @@ class FrameData:
     timestamp: float
     stream_id: str
     frame_number: int
-    instance_id:str
+    # instance_id:str

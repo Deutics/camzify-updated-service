@@ -20,12 +20,11 @@ def start_forwarder_thread(
     in_queue,
     out_queue,
     stream_cfg,
-    store,
+    rule_config_store,
     stop_event,
     threads_list,
     logger,
     is_stream_active_fn,
-    within_time_bounds_fn,
 ):
     """Initialize and start a ForwarderWorker thread for a stream."""
     fw = ForwarderWorker(
@@ -33,10 +32,10 @@ def start_forwarder_thread(
         in_queue=in_queue,
         out_queue=out_queue,
         stream_cfg=stream_cfg,
+        rule_config_store = rule_config_store,
         is_active_fn=is_stream_active_fn,
-        within_time_bounds_fn=within_time_bounds_fn,
         stop_event=stop_event,
-        instance_id=store.get_instance_id(sid),
+        # instance_id=rule_config_store.get_instance_id(sid),
     )
     t = start_daemon_thread(fw.run, name=f"forwarder-{sid}", threads_list=threads_list)
     logger.debug(f"Started forwarder for stream {sid}")

@@ -2,9 +2,15 @@ from datetime import datetime, time as dtime
 from typing import Dict, Any
 
 
-def is_stream_active(cfg: Dict[str, Any]) -> bool:
-    """Check if stream is active. Currently always returns True."""
-    return cfg.get("is_active", True)
+def is_stream_active(rule_config_store, stream_id: str) -> bool:
+    """
+    Return True if the stream has at least one active feature.
+    rule_config_store knows which features are enabled per stream.
+    """
+    active_features = rule_config_store.get_active_features(stream_id)
+    return bool(active_features)  # True if at least one feature is active
+
+
 
 
 def within_time_bounds(cfg: Dict[str, Any], timestamp: float) -> bool:

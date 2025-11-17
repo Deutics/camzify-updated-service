@@ -34,8 +34,7 @@ class MultiStreamVideoAnalyticsService:
 
     def __init__(
         self,
-        streams_config: List[Dict[str, Any]],
-        rules_config: Dict[str, Any],
+        streams_config: Dict[str, Any],
         model_dir: str = "yolov11",
         queue_size: int = 30,
         target_fps: float = 15.0,
@@ -46,31 +45,29 @@ class MultiStreamVideoAnalyticsService:
         self.streams_config = streams_config
         self.target_fps = float(max(1.0, target_fps))
 
-        self.rule_config_store = RuleConfigStore(
-            initial_rules=rules_config, initial_streams=streams_config
-        )
+        self.rule_config_store = RuleConfigStore(initial_streams=streams_config)
 
         self.width = int(width)
         self.height = int(height)
 
         self.stream_cfg_map = {
-            str(cfg["stream_id"]): dict(cfg) for cfg in streams_config
+            str(sid): dict(cfg) for sid, cfg in streams_config.items()
         }
+
         self.stream_dims = {
-            str(cfg["stream_id"]): (
+            str(sid): (
                 int(cfg.get("camera_width", self.width)),
                 int(cfg.get("camera_height", self.height)),
             )
-            for cfg in streams_config
-        }
+            for sid, cfg in streams_config.items()}
 
         self.input_queues = {
-            str(cfg["stream_id"]): mp.Queue(maxsize=queue_size)
-            for cfg in streams_config
+            str(sid): mp.Queue(maxsize=queue_size)
+            for sid in streams_config.keys()
         }
         self.frame_queues = {
-            str(cfg["stream_id"]): PriorityThreadSafeQueue(maxsize=queue_size)
-            for cfg in streams_config
+            str(sid): PriorityThreadSafeQueue(maxsize=queue_size)
+            for sid in streams_config.keys()
         }
 
         self.capture_manager = MultiprocessCaptureManager(
@@ -91,8 +88,8 @@ class MultiStreamVideoAnalyticsService:
         self.object_tracker = TrackedObjectManager()
 
         self.alert_systems, self.visualizers = {}, {}
-        for cfg in streams_config:
-            sid = str(cfg["stream_id"])
+        for sid, cfg in streams_config.items():
+            sid = str(sid)
             alert, viz, dims = create_stream_components(
                 sid, cfg, self.width, self.height
             )
@@ -129,12 +126,11 @@ class MultiStreamVideoAnalyticsService:
                 in_queue=self.input_queues[sid],
                 out_queue=self.frame_queues[sid],
                 stream_cfg=self.stream_cfg_map[sid],
-                store=self.rule_config_store,
+                rule_config_store=self.rule_config_store,
                 stop_event=self._stop_event,
                 threads_list=self._threads,
                 logger=logger,
                 is_stream_active_fn=is_stream_active,
-                within_time_bounds_fn=within_time_bounds,
             )
 
         for sid, viz in self.visualizers.items():

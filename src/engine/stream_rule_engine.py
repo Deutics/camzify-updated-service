@@ -52,7 +52,7 @@ class StreamRuleEngine:
         self.feature_instances: Dict[Tuple[str, int], FeatureBase] = {}
         self._features_lock = threading.Lock()
 
-        safe_call(self._load_features_from_config)
+        self._load_features_from_config()
         self.worker_thread.start()
 
     # -----------------------------
@@ -91,17 +91,20 @@ class StreamRuleEngine:
     # Internal: config handling
     # -----------------------------
     def _load_features_from_config(self) -> None:
-        cfgs = safe_call(lambda: self.config_store.get_active_features(self.stream_id) or {}, default={})
+        cfgs = self.config_store.get_active_features(self.stream_id) or {}
         new_instances: Dict[Tuple[str, int], FeatureBase] = {}
-        logger.info(f"[StreamRuleEngine:{self.stream_id}] loading features from config; found: {list(cfgs.keys())}")
 
         for feature_name, cfg_list in cfgs.items():
+            import pprint
+            print("8" * 100)
+            pprint.pprint(f"{feature_name} for {cfg_list}", indent=4)
+            print("9" * 100)
             factory = self.feature_registry.get(feature_name) or get_feature_factory(feature_name)
             if not factory:
                 continue
             for idx, cfg in enumerate(cfg_list):
                 key = (feature_name, idx)
-                inst = safe_call(lambda: factory(cfg, self.stream_id, self.alert_system, self.visualizer))
+                inst = factory(cfg, self.stream_id, self.alert_system, self.visualizer)
                 if inst:
                     new_instances[key] = inst
 
@@ -133,6 +136,7 @@ class StreamRuleEngine:
                 feature_items = list(self.feature_instances.items())
 
             for feature_key, feature_inst in feature_items:
+
                 def _process_feature():
                     events = None
                     try:

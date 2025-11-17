@@ -4,6 +4,8 @@ import cv2
 import numpy as np
 import queue as _queue
 from typing import Dict, Any, Callable
+
+from src.core.rule_config_store import RuleConfigStore
 from src.data_models.frame_data import FrameData
 from src.utils.safe_counter import SafeCounter
 from src.utils.logger import get_logger
@@ -24,19 +26,20 @@ class ForwarderWorker:
         in_queue,
         out_queue,
         stream_cfg: Dict[str, Any],
-        is_active_fn: Callable[[Dict[str, Any]], bool],
-        within_time_bounds_fn: Callable[[Dict[str, Any], float], bool],
+        rule_config_store,
+
+        is_active_fn: Callable[[RuleConfigStore, str], bool],
         stop_event,
-        instance_id: str,
+        # instance_id: str,
     ):
         self.stream_id = stream_id
         self.in_q = in_queue
         self.out_q = out_queue
         self.cfg = stream_cfg
+        self.rule_config_store = rule_config_store
         self.is_active = is_active_fn
-        self.within_time_bounds = within_time_bounds_fn
         self._stop_event = stop_event
-        self.instance_id = instance_id
+        # self.instance_id = instance_id
 
     def run(self):
         """Main loop: decode, filter, forward with adaptive thinning."""
@@ -62,24 +65,22 @@ class ForwarderWorker:
                 continue
 
             try:
+
+                # Check stream active status
+                if not self.is_active(self.rule_config_store, self.stream_id):
+                    frames_filtered_inactive_count += 1
+                    continue
+
                 # payload = (jpeg_bytes, timestamp, stream_id, frame_number)
                 jpeg_bytes, ts, sid, frame_num = payload
                 frame_arr = np.frombuffer(jpeg_bytes, dtype=np.uint8)
                 frame = cv2.imdecode(frame_arr, cv2.IMREAD_COLOR)
 
+
                 if frame is None:
                     frames_dropped_count += 1
                     continue
 
-                # Check stream active status
-                if not self.is_active(self.cfg):
-                    frames_filtered_inactive_count += 1
-                    continue
-
-                # Check time bounds
-                if not self.within_time_bounds(self.cfg, ts or time.time()):
-                    frames_filtered_time_count += 1
-                    continue
 
                 # Adaptive thinning
                 current_frame_index = frames_processed_counter.increment()
@@ -97,7 +98,7 @@ class ForwarderWorker:
                     timestamp=ts or time.time(),
                     stream_id=sid or self.stream_id,
                     frame_number=frame_num or 0,
-                    instance_id=self.instance_id,
+                    # instance_id=self.instance_id,
                 )
 
                 #  Push as (sid, FrameData)

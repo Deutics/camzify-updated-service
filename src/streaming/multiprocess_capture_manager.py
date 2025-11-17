@@ -1,5 +1,5 @@
 # src/streaming/MultiprocessCaptureManager.py
-from typing import Dict, List, Any, Optional, Union
+from typing import Dict, Any, Optional
 import multiprocessing as mp
 import threading
 from pathlib import Path
@@ -7,22 +7,23 @@ from pathlib import Path
 from src.streaming.capture_worker import capture_worker
 from src.utils.service_helpers import safe_join_process, safe_join_thread
 from src.utils.logger import get_logger
+
 logger = get_logger(__name__)
 
 class MultiprocessCaptureManager:
     """Manages multiple capture workers in separate processes or threads."""
 
     def __init__(
-            self,
-            streams_config: List[Dict[str, Any]],
-            input_queues: Dict[str, mp.Queue],
-            target_fps: float = 15.0,
-            default_width: int = 640,
-            default_height: int = 480,
-            use_thread_for_local: bool = True,
+        self,
+        streams_config: Dict[str, Any],
+        input_queues: Dict[str, mp.Queue],
+        target_fps: float = 15.0,
+        default_width: int = 640,
+        default_height: int = 480,
+        use_thread_for_local: bool = True,
     ):
 
-        self.stream_configs = streams_config
+        self.stream_configs = streams_config  # keyed by stream_id
         self.queues = input_queues
         self.target_fps = float(target_fps)
         self.default_width = int(default_width)
@@ -62,10 +63,10 @@ class MultiprocessCaptureManager:
         }
 
     def _spawn_worker(self, cfg: Dict[str, Any]):
-        sid = cfg["stream_id"]
+        sid = str(cfg["stream_id"])
         rtsp_url = cfg.get("rtsp_url")
         https_url = cfg.get("https_url")
-        q = self.queues[sid]
+        input_q = self.queues[sid]
         width = int(cfg.get("camera_width", self.default_width))
         height = int(cfg.get("camera_height", self.default_height))
         per_stream_cfg = self._build_per_stream_cfg(cfg)
@@ -77,7 +78,7 @@ class MultiprocessCaptureManager:
             self.thread_stop_events[sid] = th_stop
             t = threading.Thread(
                 target=capture_worker,
-                args=(rtsp_url, https_url, sid, self.target_fps, q, width, height, per_stream_cfg, th_stop),
+                args=(rtsp_url, https_url, sid, self.target_fps, input_q, width, height, per_stream_cfg, th_stop),
                 daemon=True,
             )
             t.start()
@@ -88,7 +89,7 @@ class MultiprocessCaptureManager:
             self.proc_stop_events[sid] = p_stop
             p = mp.Process(
                 target=capture_worker,
-                args=(rtsp_url, https_url, sid, self.target_fps, q, width, height, per_stream_cfg, p_stop),
+                args=(rtsp_url, https_url, sid, self.target_fps, input_q, width, height, per_stream_cfg, p_stop),
                 daemon=False,
             )
             p.start()
@@ -99,8 +100,8 @@ class MultiprocessCaptureManager:
 
     def start(self):
         with self._lock:
-            for cfg in self.stream_configs:
-                sid = cfg["stream_id"]
+            for cfg in self.stream_configs.values():
+                sid = str(cfg["stream_id"])
                 if sid in self.procs or sid in self.threads:
                     continue
                 self._spawn_worker(cfg)
@@ -133,7 +134,7 @@ class MultiprocessCaptureManager:
         logger.info("[CAPMAN] All capture workers stopped.")
 
     def start_stream(self, stream_cfg: Dict[str, Any]) -> bool:
-        sid = stream_cfg["stream_id"]
+        sid = str(stream_cfg["stream_id"])
         with self._lock:
             if sid in self.procs or sid in self.threads:
                 logger.info(f"[CAPMAN] start_stream: {sid} already running")
@@ -143,66 +144,8 @@ class MultiprocessCaptureManager:
                 return False
             try:
                 self._spawn_worker(stream_cfg)
-                if not any(s["stream_id"] == sid for s in self.stream_configs):
-                    self.stream_configs.append(stream_cfg)
+                self.stream_configs[sid] = dict(stream_cfg)
                 return True
             except Exception as e:
                 logger.exception(f"[CAPMAN] start_stream: failed for {sid}: {e}")
                 return False
-
-    def stop_stream(self, stream_id: str) -> bool:
-        sid = str(stream_id)
-        with self._lock:
-            if sid in self.threads:
-                ev = self.thread_stop_events.get(sid)
-                if ev:
-                    ev.set()
-                t = self.threads.pop(sid, None)
-                self.thread_stop_events.pop(sid, None)
-            else:
-                t = None
-
-            if sid in self.procs:
-                evp = self.proc_stop_events.get(sid)
-                if evp:
-                    evp.set()
-                p = self.procs.pop(sid, None)
-                self.proc_stop_events.pop(sid, None)
-            else:
-                p = None
-
-        if t:
-            safe_join_thread(t, timeout=2)
-        if p:
-            safe_join_process(p, timeout=2)
-
-        with self._lock:
-            self.stream_configs = [c for c in self.stream_configs if str(c.get("stream_id")) != sid]
-
-        logger.info(f"[CAPMAN] stop_stream: {sid} stopped")
-        return True
-
-    def restart_stream(self, stream_id: str, new_stream_cfg: Optional[Dict[str, Any]] = None) -> bool:
-        sid = str(stream_id)
-        self.stop_stream(sid)
-
-        cfg_to_use = None
-        if new_stream_cfg is not None:
-            cfg_to_use = dict(new_stream_cfg)
-        else:
-            with self._lock:
-                for c in self.stream_configs:
-                    if str(c.get("stream_id")) == sid:
-                        cfg_to_use = dict(c)
-                        break
-
-        if cfg_to_use is None:
-            logger.warning(f"[CAPMAN] restart_stream: {sid} missing config")
-            return False
-
-        ok = self.start_stream(cfg_to_use)
-        if ok:
-            logger.info(f"[CAPMAN] restart_stream: {sid} restarted")
-        else:
-            logger.warning(f"[CAPMAN] restart_stream: {sid} failed to start")
-        return ok
