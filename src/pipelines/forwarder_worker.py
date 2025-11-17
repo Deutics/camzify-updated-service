@@ -110,7 +110,7 @@ class ForwarderWorker:
                 frames_dropped_count += 1
 
             now = time.time()
-            if now - last_stats_time >= 1.0:
+            if now - last_stats_time >= 3.0:
                 logger.info(
                     f"[STREAM {self.stream_id}] Forwarded={frames_forwarded_count} | "
                     f"Dropped={frames_dropped_count} | Thinned={frames_thinned_count} | "

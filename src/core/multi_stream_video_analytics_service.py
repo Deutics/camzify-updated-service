@@ -163,9 +163,6 @@ class MultiStreamVideoAnalyticsService:
         safe_join_threads(self._threads, timeout=0.5)
         logger.info("Service stopped cleanly.")
 
-    def _init_roundrobin_order(self):
-        self._rr_keys = list(self.frame_queues.keys())
-
     def _batch_loop(self):
         while not self._stop_event.is_set():
             try:

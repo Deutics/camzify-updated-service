@@ -95,10 +95,6 @@ class StreamRuleEngine:
         new_instances: Dict[Tuple[str, int], FeatureBase] = {}
 
         for feature_name, cfg_list in cfgs.items():
-            import pprint
-            print("8" * 100)
-            pprint.pprint(f"{feature_name} for {cfg_list}", indent=4)
-            print("9" * 100)
             factory = self.feature_registry.get(feature_name) or get_feature_factory(feature_name)
             if not factory:
                 continue
