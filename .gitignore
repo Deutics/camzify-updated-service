@@ -1,7 +1,3 @@
-# =====================================
-# 🧠 Camzify Vision Service - .gitignore
-# =====================================
-
 # --- Python & Virtual Environment ---
 __pycache__/
 *.py[cod]
@@ -55,6 +51,12 @@ weights/
 *.trt
 *.pth
 *.tflite
+CHANGES.md
+CLEANUP_INSTRUCTIONS.md
+CROSSCHECK_ANALYSIS.md
+FINAL_CROSSCHECK.md
+README.md
+
 
 # --- Cache & Metadata ---
 .cache/
@@ -75,4 +77,4 @@ Thumbs.db
 #------- Files ------
 test.py
 structure.txt
-
+stream_config.py
