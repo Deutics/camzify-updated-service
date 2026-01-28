@@ -103,7 +103,7 @@ class FrameProcessor:
         if features:
             for feature in features:
                 try:
-                    events = feature.check_intrusion(tracked_objects, tracks, annotated_frame)
+                    events = feature.process(tracked_objects, tracks, annotated_frame)
                     if events:
                         all_events.extend(events)
                 except Exception as e:

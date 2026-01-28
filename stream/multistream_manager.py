@@ -1,9 +1,9 @@
-"""Multistream frame buffer for parallel frame capture with display"""
+"""Optimized multistream capture - minimal copying, uses StreamHandler reconnection"""
 
 import threading
 import time
 import cv2
-from typing import Dict, Optional, Tuple
+from typing import Dict, Optional
 from stream.stream_handler import StreamHandler
 from utils_main.logger import get_logger
 
@@ -14,7 +14,7 @@ class StreamFrameBuffer:
     def __init__(self, source: str, stream_id: str):
         self.source = source
         self.stream_id = stream_id
-        self.stream_handler = StreamHandler(source)
+        self.stream_handler = StreamHandler(source, max_retries=5, retry_delay=2.0)
         self.latest_frame = None
         self.latest_annotated_frame = None
         self.frame_lock = threading.Lock()
@@ -23,41 +23,50 @@ class StreamFrameBuffer:
         self.frame_count = 0
         
     def start(self):
-        self.stream_handler.start_stream()
         self.running = True
         self.capture_thread = threading.Thread(target=self._capture_loop, daemon=True)
         self.capture_thread.start()
-        logger.info(f"Stream {self.stream_id} started capturing from {self.source}")
+        logger.info(f"Stream {self.stream_id} thread started")
         
     def _capture_loop(self):
+        """Capture loop - StreamHandler handles all reconnection"""
+        try:
+            self.stream_handler.start_stream()
+        except Exception as e:
+            logger.error(f"Stream {self.stream_id} failed to start: {e}")
+            return
+        
         while self.running:
             try:
                 frame, _ = self.stream_handler.read_frame()
                 if frame is not None:
                     with self.frame_lock:
-                        self.latest_frame = frame.copy()
+                        # Store reference - frame from cv2.read() is already a new array
+                        self.latest_frame = frame
                         self.frame_count += 1
+                        
             except Exception as e:
-                logger.error(f"Stream {self.stream_id} capture error: {e}")
+                logger.error(f"Stream {self.stream_id} error: {e}")
                 time.sleep(1)
                 
-    def get_latest_frame(self) -> Optional[Tuple]:
+    def get_latest_frame(self) -> Optional:
+        """Get latest frame - copies for thread safety since processing modifies it"""
         with self.frame_lock:
             if self.latest_frame is not None:
-                return self.latest_frame.copy(), self.stream_id
-            return None, self.stream_id
+                return self.latest_frame.copy()  # copy needed for thread safety
+            return None
             
     def update_annotated_frame(self, annotated_frame):
+        """Store annotated frame for display"""
         with self.frame_lock:
-            self.latest_annotated_frame = annotated_frame.copy()
+            self.latest_annotated_frame = annotated_frame
             
     def get_display_frame(self):
+        """Get frame for display - no copy needed, just for viewing"""
         with self.frame_lock:
             if self.latest_annotated_frame is not None:
-                return self.latest_annotated_frame.copy()
-            elif self.latest_frame is not None:
-                return self.latest_frame.copy()
-            return None
+                return self.latest_annotated_frame
+            return self.latest_frame
             
     def stop(self):
         self.running = False
@@ -77,12 +86,12 @@ class MultiStreamManager:
     def start_all(self):
         for stream_id, buffer in self.stream_buffers.items():
             buffer.start()
-        logger.info(f"Started {len(self.stream_buffers)} streams")
+        logger.info(f"Started {len(self.stream_buffers)} stream threads")
         
     def get_all_latest_frames(self) -> Dict[str, any]:
         frames = {}
         for stream_id, buffer in self.stream_buffers.items():
-            frame, _ = buffer.get_latest_frame()
+            frame = buffer.get_latest_frame()
             if frame is not None:
                 frames[stream_id] = frame
         return frames
@@ -93,13 +102,11 @@ class MultiStreamManager:
             
     def display_all_streams(self):
         if not self.enable_display:
-            return False
+            return True
             
         for stream_id, buffer in self.stream_buffers.items():
             frame = buffer.get_display_frame()
             if frame is not None:
-                # fps_text = f"Stream: {stream_id} | Frames: {buffer.frame_count}"
-                # cv2.putText(frame, fps_text, (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
                 cv2.imshow(f"Stream {stream_id}", frame)
         
         key = cv2.waitKey(1) & 0xFF

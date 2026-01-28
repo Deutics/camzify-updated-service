@@ -40,7 +40,7 @@ class LineIntrusionDetector:
         # logger.info(f"  Line: {line_coords[0]} -> {line_coords[1]}")
         # logger.info(f"  Direction: {direction_to_check}")
 
-    def check_intrusion(self, tracked_objects: List, tracks: List, frame) -> List[Dict]:
+    def process(self, tracked_objects: List, tracks: List, frame) -> List[Dict]:
         """
         Check if tracked objects cross the line (CLASSIFICATION ONLY)
         
