@@ -16,38 +16,70 @@ class ConfigFetcher:
     def __init__(self):
         self.base_url = BASE_URL
         self.headers = {"Authorization": f"Bearer {API_TOKEN}"}
-        # print(f">>>>>token: {API_TOKEN}")
         self.stream_parser = StreamParser(
             default_width=CamzifyConfig.DEFAULT_WIDTH,
             default_height=CamzifyConfig.DEFAULT_HEIGHT
         )
     
-    def fetch_line_intrusion_configs(self, stream_ids: Optional[List[int]] = None, is_active: bool = True) -> Dict[str, Dict]:
-        """Fetch line intrusion configurations from API"""
-        endpoint = f"{self.base_url}/api/v1/instance/stream/analytic/line_intrusion_detector/instance/"
-        params = {"is_active": str(is_active)}
+    def fetch_configs(
+        self, 
+        feature_endpoints: List[str],
+        stream_ids: Optional[List[int]] = None, 
+        is_active: Optional[bool] = None
+    ) -> Dict[str, Dict]:
+        """
+        Fetch configurations for multiple features from API.
         
-        if stream_ids:
-            params["stream__in"] = ",".join(map(str, stream_ids))
-        
-        try:
-            response = requests.get(endpoint, headers=self.headers, params=params, timeout=15)
-            response.raise_for_status()
+        Args:
+            feature_endpoints: List of feature endpoint names (e.g., ["line_intrusion_detector", "zone_intrusion_detector"])
+            stream_ids: Optional list of specific stream IDs to fetch
+            is_active: Filter for active instances only
             
-            data = response.json()
-            results = data.get("results", [])
-            
-            logger.info(f"Fetched {len(results)} line intrusion configs from API")
-            
-            return self._parse_configs(results, "line_intrusion")
-            
-        except Exception as e:
-            logger.error(f"Failed to fetch configs: {e}")
-            return {}
-    
-    def _parse_configs(self, results: List[Dict], feature_type: str) -> Dict[str, Dict]:
-        """Parse API results into unified stream configs"""
+        Returns:
+            Unified config dict:
+            {
+                "stream_id": {
+                    "stream_id": str,
+                    "rtsp_url": str,
+                    "camera_width": int,
+                    "camera_height": int,
+                    "features": {
+                        "line_intrusion_detector": [list of configs],
+                        "zone_intrusion_detector": [list of configs],
+                    }
+                }
+            }
+        """
         unified_config = {}
+        
+        for feature_endpoint in feature_endpoints:
+            try:
+                endpoint = f"{self.base_url}/api/v1/instance/stream/analytic/{feature_endpoint}/instance/"
+                params = {"is_active": str(is_active)}
+                
+                if stream_ids:
+                    params["stream__in"] = ",".join(map(str, stream_ids))
+                
+                logger.info(f"Fetching {feature_endpoint} configs...")
+                response = requests.get(endpoint, headers=self.headers, params=params, timeout=15)
+                response.raise_for_status()
+                
+                data = response.json()
+                results = data.get("results", [])
+                
+                logger.info(f"Fetched {len(results)} {feature_endpoint} configs")
+                
+                # Parse and merge configs
+                self._parse_configs(results, feature_endpoint, unified_config)
+                
+            except Exception as e:
+                logger.error(f"Failed to fetch {feature_endpoint} configs: {e}")
+                continue
+        
+        return unified_config
+    
+    def _parse_configs(self, results: List[Dict], feature_type: str, unified_config: Dict):
+        """Parse API results into unified stream configs"""
         
         for item in results:
             try:
@@ -57,26 +89,25 @@ class ConfigFetcher:
                 if not stream_id:
                     continue
                 
-                # Parse stream metadata
-                parsed_stream = self.stream_parser.parse_stream_info(stream_info)
-                if not parsed_stream:
-                    continue
-                
-                # Decrypt RTSP URL
-                rtsp_url = parsed_stream.get("rtsp_url")
-                encrypted_url = parsed_stream["https_url"]
-                https_url = decrypt_aes_cbc(
-                    encrypted_url,
-                    aes_key=CamzifyConfig.AES_KEY,
-                    delimiter=CamzifyConfig.AES_DELIMITER
-                )
-                
-                if not (https_url or rtsp_url):
-                    logger.warning(f"Failed to decrypt URL for stream {stream_id}")
-                    continue
-                
                 # Initialize stream config if not exists
                 if stream_id not in unified_config:
+                    parsed_stream = self.stream_parser.parse_stream_info(stream_info)
+                    if not parsed_stream:
+                        continue
+                    
+                    # Decrypt RTSP URL
+                    encrypted_url = parsed_stream["https_url"]
+                    rtsp_url = parsed_stream["rtsp_url"]
+                    https_url = decrypt_aes_cbc(
+                        encrypted_url,
+                        aes_key=CamzifyConfig.AES_KEY,
+                        delimiter=CamzifyConfig.AES_DELIMITER
+                    )
+                    
+                    if not (rtsp_url or https_url):
+                        logger.warning(f"Failed to decrypt URL for stream {stream_id}")
+                        continue
+                    
                     unified_config[stream_id] = {
                         "stream_id": stream_id,
                         "rtsp_url": rtsp_url,
@@ -87,7 +118,9 @@ class ConfigFetcher:
                     }
                 
                 # Parse feature configuration
-                feature_config = self._parse_feature(item, parsed_stream["width"], parsed_stream["height"])
+                width = unified_config[stream_id]["camera_width"]
+                height = unified_config[stream_id]["camera_height"]
+                feature_config = self._parse_feature(item, width, height)
                 
                 if feature_config:
                     unified_config[stream_id]["features"].setdefault(feature_type, []).append(feature_config)
@@ -95,8 +128,6 @@ class ConfigFetcher:
             except Exception as e:
                 logger.warning(f"Failed to parse config item: {e}")
                 continue
-        
-        return unified_config
     
     def _parse_feature(self, item: Dict, width: int, height: int) -> Optional[Dict]:
         """Parse feature-specific configuration"""
