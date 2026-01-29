@@ -17,33 +17,35 @@ def build_stream_features_from_api(configs: dict) -> tuple:
     stream_features = {}
     
     for stream_id, config in configs.items():
-        rtsp_url = config.get("rtsp_url")
-        if not rtsp_url:
+        if config.get("rtsp_url"):
+            stream_url = config["rtsp_url"]
+        elif config.get("https_url"):
+            stream_url = config["https_url"]
+        else:
             continue
-        
-        stream_sources[stream_id] = rtsp_url
+
+        stream_url = "videos/yt_fail1.mp4"
+
+        stream_sources[stream_id] = stream_url
         
         features_config = config.get("features", {})
-        line_intrusion_configs = features_config.get("line_intrusion", [])
+        line_intrusion_configs = features_config.get("line_intrusion_detector", [])
         
         if line_intrusion_configs:
             feature_instances = []
             for feat_cfg in line_intrusion_configs:
                 try:
-                    # Convert direction (0=any, 1=left, 2=right)
-                    direction_code = feat_cfg.get("direction_to_use", 0)
-                    if direction_code == 0:
-                        direction_check = {"left": True, "right": True}
-                    elif direction_code == 1:
-                        direction_check = {"left": True, "right": False}
-                    else:
-                        direction_check = {"left": False, "right": True}
-                    
                     detector = LineIntrusionDetector(
                         line_coords=feat_cfg.get("line_coords"),
                         instance_id=feat_cfg.get("instance_id"),
                         stream_id=stream_id,
-                        direction_to_check=direction_check
+                        direction_to_use=feat_cfg.get("direction_to_use", 0),
+                        bounding_box_start=feat_cfg.get("bounding_box_start"),
+                        bounding_box_end=feat_cfg.get("bounding_box_end"),
+                        precision_factor=feat_cfg.get("precision_factor", 0),
+                        time_bound_start=feat_cfg.get("time_bound_start", "00:00:00"),
+                        time_bound_end=feat_cfg.get("time_bound_end", "23:59:59"),
+                        alert_classes=feat_cfg.get("alert_classes")
                     )
                     feature_instances.append(detector)
                     
@@ -64,10 +66,15 @@ def main():
     # Fetch configurations from API
     logger.info("Fetching configurations from API...")
     config_fetcher = ConfigFetcher()
-
-    stream_ids = [73,74]  # Or None for all active streams
-    configs = config_fetcher.fetch_line_intrusion_configs(stream_ids=stream_ids, is_active=True)
     
+    # Fetch configs for specific streams or all active
+    stream_ids = [73, 74, 367]  # Or None for all active streams
+    features_list = ["line_intrusion_detector"]
+    configs = config_fetcher.fetch_configs(feature_endpoints=features_list, stream_ids=stream_ids, is_active=True)
+
+    # import pprint
+    # pprint.pprint(configs, indent=4)
+    # exit()
     if not configs:
         logger.error("No configurations fetched from API")
         return
@@ -110,7 +117,7 @@ def main():
                 try:
                     features = stream_features.get(stream_id, [])
                     
-                    annotated_frame, events = frame_processor.process_frame(
+                    annotated_frame= frame_processor.process_frame(
                         frame, 
                         stream_id, 
                         features
@@ -118,12 +125,12 @@ def main():
                     
                     stream_manager.update_annotated_frame(stream_id, annotated_frame)
                     
-                    if events:
-                        for event in events:
-                            logger.warning(
-                                f"[EVENT] {event['stream_id']}: "
-                                f"Track {event['track_id']} crossed {event['direction']}"
-                            )
+                    # if events:
+                    #     for event in events:
+                    #         logger.warning(
+                    #             f"[EVENT] {event['stream_id']}: "
+                    #             f"Track {event['track_id']} crossed {event['direction']}"
+                    #         )
                 except Exception as e:
                     logger.error(f"Processing error for {stream_id}: {e}")
                     continue

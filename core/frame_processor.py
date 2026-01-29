@@ -53,7 +53,7 @@ class FrameProcessor:
             logger.info(f"Created SORT tracker for stream: {stream_id}")
         return self.stream_trackers[stream_id]
     
-    def process_frame(self, frame: np.ndarray, stream_id: str, features: List = None) -> Tuple[np.ndarray, List]:
+    def process_frame(self, frame: np.ndarray, stream_id: str, features: List = None):
         """
         Process frame: detect once (shared), track per-stream, features classify
         
@@ -67,7 +67,7 @@ class FrameProcessor:
             all_events: List of events from all features
         """
         annotated_frame = frame.copy()
-        all_events = []
+        # all_events = []
         
         # 1. SINGLE DETECTION (shared YOLO for all streams)
 
@@ -103,16 +103,16 @@ class FrameProcessor:
         if features:
             for feature in features:
                 try:
-                    events = feature.process(tracked_objects, tracks, annotated_frame)
-                    if events:
-                        all_events.extend(events)
+                    feature.process(tracks, annotated_frame)
+                    # if events:
+                    #     all_events.extend(events)
                 except Exception as e:
                     logger.error(f"Feature {type(feature).__name__} error: {e}", exc_info=True)
         
         # 4. Draw basic visualization (bbox + track IDs)
-        self._draw_tracked_objects(annotated_frame, tracked_objects)
+        annotated_frame= self._draw_tracked_objects(annotated_frame, tracked_objects)
         
-        return annotated_frame, all_events
+        return annotated_frame
     
     def _draw_tracked_objects(self, frame: np.ndarray, tracked_objects: List):
         """Draw simple bounding boxes for tracked objects"""
@@ -127,3 +127,4 @@ class FrameProcessor:
             text = f"ID:{tracker_id} {label}"
             cv2.putText(frame, text, (x1, y1 - 5), cv2.FONT_HERSHEY_SIMPLEX, 
                        0.5, (0, 255, 0), 2)
+        return frame
