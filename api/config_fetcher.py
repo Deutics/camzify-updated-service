@@ -5,7 +5,7 @@ from api.camzify.config import CamzifyConfig
 from api.parsers.stream_parser import StreamParser
 from api.parsers.coordinate_mapper import CoordinateMapper
 from api.core.crypto_utils import decrypt_aes_cbc
-from utils_main.logger import get_logger
+from Utils.logger import get_logger
 
 logger = get_logger(__name__)
 

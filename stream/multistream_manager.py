@@ -5,7 +5,7 @@ import time
 import cv2
 from typing import Dict, Optional
 from stream.stream_handler import StreamHandler
-from utils_main.logger import get_logger
+from Utils.logger import get_logger
 
 logger = get_logger(__name__)
 

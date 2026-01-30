@@ -1,5 +1,5 @@
 from typing import Dict, Any, Optional, Tuple
-from utils_main.logger import get_logger
+from Utils.logger import get_logger
 
 logger = get_logger(__name__)
 

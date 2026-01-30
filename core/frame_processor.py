@@ -2,10 +2,10 @@
 
 import cv2
 import numpy as np
-from typing import Dict, List, Tuple
+from typing import Dict, List
 from Utils.ObjectDetectors.Yolov11.YoloDetector import YoloDetector
 from Utils.Trackers.Sort.sort.sort import Sort
-from utils_main.logger import get_logger
+from Utils.logger import get_logger
 
 logger = get_logger(__name__)
 
@@ -19,17 +19,18 @@ class FrameProcessor:
         
         Args:
             model_path: Path to YOLO model
-            conf_thresh: Confidence threshold for detections
+            conf_thresh: Detection confidence threshold
         """
         logger.info("Initializing FrameProcessor with single model for all streams")
         
         # ONE YOLO Detector for all streams (shared)
+        # NOTE: Must detect ALL classes - filtering happens at feature level
         self.yolo_detector = YoloDetector(
             model_name="yolo11n.pt",
             model_path=model_path,
             gpu_inference=True,
             conf_threshold=conf_thresh,
-            expected_objs=["person","car"]
+            expected_objs=None  # Detect all classes, filter per-stream
         )
         
         # SEPARATE SORT trackers per stream (lightweight, no models)
@@ -64,13 +65,10 @@ class FrameProcessor:
             
         Returns:
             annotated_frame: Frame with visualizations
-            all_events: List of events from all features
         """
         annotated_frame = frame.copy()
-        # all_events = []
         
-        # 1. SINGLE DETECTION (shared YOLO for all streams)
-
+        # 1. SINGLE DETECTION (shared YOLO for all streams - detects ALL classes)
         detections_boxes = self.yolo_detector.process_image_for_tracker(frame)
         
         # 2. PER-STREAM TRACKING (separate SORT tracker per stream)
@@ -87,30 +85,28 @@ class FrameProcessor:
         
         # Get tracks with position history (for line crossing)
         tracks = tracker.get_tracks()
-        # print(f"History for stream: {stream_id}: {len(tracks)}")
         
-        # Convert tracked detections to dict format
+        # Convert tracked detections to dict format for visualization
         tracked_objects = []
         for det in tracked_detections:
             tracked_objects.append({
                 "bbox": det[:4].tolist(),
                 "tracker_id": int(det[4]),
-                "label": self.yolo_detector.names[int(det[5])] if len(det) > 5 else "person",
+                "label": self.yolo_detector.names[int(det[5])] if len(det) > 5 else "unknown",
                 "confidence": det[4] if len(det) > 4 else 0.0
             })
         
-        # 3. FEATURES CLASSIFY (no models, just check intrusion/rules)
+        # 3. FEATURES CLASSIFY (with tracked_objects for class info)
         if features:
             for feature in features:
                 try:
-                    feature.process(tracks, annotated_frame)
-                    # if events:
-                    #     all_events.extend(events)
+                    # Pass tracked_objects for simple class lookup
+                    feature.process(tracks, annotated_frame, tracked_objects)
                 except Exception as e:
                     logger.error(f"Feature {type(feature).__name__} error: {e}", exc_info=True)
         
         # 4. Draw basic visualization (bbox + track IDs)
-        annotated_frame= self._draw_tracked_objects(annotated_frame, tracked_objects)
+        annotated_frame = self._draw_tracked_objects(annotated_frame, tracked_objects)
         
         return annotated_frame
     
@@ -119,7 +115,7 @@ class FrameProcessor:
         for obj in tracked_objects:
             bbox = obj["bbox"]
             tracker_id = int(obj["tracker_id"])
-            label = obj.get("label", "person")
+            label = obj.get("label", "unknown")
             
             x1, y1, x2, y2 = [int(c) for c in bbox]
             cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)

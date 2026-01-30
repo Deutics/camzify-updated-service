@@ -1,7 +1,7 @@
 """Standalone YOLO Detector (No Django dependencies)"""
 
 from ultralytics import YOLO
-from utils_main.logger import get_logger
+from Utils.logger import get_logger
 import os
 import torch
 

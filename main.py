@@ -6,7 +6,7 @@ from core.frame_processor import FrameProcessor
 from features.line_intrusion_detector import LineIntrusionDetector
 from api.config_fetcher import ConfigFetcher
 from config.settings import MODEL_PATH
-from utils_main.logger import get_logger
+from Utils.logger import get_logger
 
 logger = get_logger(__name__)
 
@@ -24,7 +24,7 @@ def build_stream_features_from_api(configs: dict) -> tuple:
         else:
             continue
 
-        stream_url = "videos/yt_fail1.mp4"
+        # stream_url = "videos/demo_video.mp4"
 
         stream_sources[stream_id] = stream_url
         
@@ -45,7 +45,8 @@ def build_stream_features_from_api(configs: dict) -> tuple:
                         precision_factor=feat_cfg.get("precision_factor", 0),
                         time_bound_start=feat_cfg.get("time_bound_start", "00:00:00"),
                         time_bound_end=feat_cfg.get("time_bound_end", "23:59:59"),
-                        alert_classes=feat_cfg.get("alert_classes")
+                        alert_classes=feat_cfg.get("alert_classes"),
+                        use_async_notifications=False  # Set True to enable async
                     )
                     feature_instances.append(detector)
                     
@@ -68,7 +69,7 @@ def main():
     config_fetcher = ConfigFetcher()
     
     # Fetch configs for specific streams or all active
-    stream_ids = [73, 74, 367]  # Or None for all active streams
+    stream_ids = [73,74]  # Or None for all active streams
     features_list = ["line_intrusion_detector"]
     configs = config_fetcher.fetch_configs(feature_endpoints=features_list, stream_ids=stream_ids, is_active=True)
 

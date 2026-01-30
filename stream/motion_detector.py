@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-from utils_main.logger import get_logger
+from Utils.logger import get_logger
 
 logger = get_logger(__name__)
 

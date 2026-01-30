@@ -2,7 +2,7 @@
 import cv2
 import time
 from .motion_detector import MotionDetector
-from utils_main.logger import get_logger
+from Utils.logger import get_logger
 logger = get_logger(__name__)
 
 

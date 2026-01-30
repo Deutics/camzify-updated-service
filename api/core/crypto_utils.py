@@ -2,7 +2,7 @@ import base64
 from Cryptodome.Cipher import AES
 from Cryptodome.Util.Padding import unpad
 from typing import Optional
-from utils_main.logger import get_logger
+from Utils.logger import get_logger
 
 logger = get_logger(__name__)
 
